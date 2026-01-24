@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>NutriFit | Profile</title>
+   <link rel="stylesheet" href="css/style.css">
+ 
+</head>
+<body>
+        <!-- NAVBAR -->
+        <nav id="navbar">
+            <h2 id="app-name">NutriFit</h2>
+            <a href="dashboard.html">Dashboard</a>
+            <a href="#" id="nav-logout">Logout</a>
+        </nav>
+
+        <main id="profile-page">
+          <!-- HEADER -->
+          <section id="profile-header">
+            <h1 id="profile-name">User Name</h1>
+            <p><strong>Focus:</strong><span id="profile-focus"></span></p>
+          </section>
+
+        <span id="statusBadge" class="badge green">On Track</span>
+
+        <section id="profile-content">
+            <div id="personal-details">
+              <h2>Personal Details</h2>
+              <br>
+                <p><strong>Age:</strong> <span id="detail-age"></span></p>
+                <p><strong>Gender:</strong> <span id="detail-gender"></span></p>
+                <p><strong>Email:</strong> <span id="detail-email"></span></p>
+                <p><strong>Goal:</strong> <span id="detail-goal"></span></p>
+                <p><strong>Height:</strong> <span id="detail-height"></span> cm</p>
+                <p><strong>Weight:</strong> <span id="detail-weight"></span> kg</p>
+                <p><strong>Food Habit:</strong> <span id="detail-food"></span></p>
+                <p><strong>Allergies:</strong> <span id="detail-allergies"></span></p>
+                <p><strong>Sleep Hours:</strong> <span id="detail-sleep"></span></p>
+                <p><strong>Medical Condition:</strong> <span id="detail-medical"></span></p>
+                <p><strong>Commitment Level:</strong> <span id="detail-commitment"></span></p>
+                <p><strong>BMI:</strong> <span id="detail-bmi"></span></p>
+                <p><strong>BMR:</strong> <span id="detail-bmr"></span></p>
+            </div>
+          </section>
+
+
+  <section id="daily-tracker">
+
+      <div class="profile-card" id="calorie-tracker">
+        <h2>Daily Calorie Tracker</h2>
+          <label>Total Calories Goal:</label>
+          <input type="number" id="totalCalories" value="2000" disabled>
+          <button id="changeCaloriesBtn" type="button">Change Goal</button>
+          <br>
+          <label>Add Calories:</label>
+          <input type="number" id="addCalories" min="1" placeholder="Enter calories">
+          <button id="addCaloriesBtn" type="button">Add</button>
+          <div class="progress"><div id="calorieProgress" class="progress-fill"></div></div>
+      </div>
+
+      <div class="profile-card" id="water-tracker">
+        <h2>Daily Water Tracker</h2>
+          <label>Total Water Goal (ml):</label>
+          <input type="number" id="totalWater" value="3000" disabled>
+          <button id="changeWaterBtn" type="button">Change Goal</button>
+          <br>
+          <label>Add Water:</label>
+          <button id="addWaterBtn" type="button">+250 ml</button>
+          <div class="progress"><div id="waterProgress" class="progress-fill blue"></div></div>
+      </div>
+
+        <div class="profile-card" id="rate-day">
+          <h2>Rate Your Day</h2>
+            <div class="rating">
+              <input type="radio" id="star5" name="rating" value="5"><label for="star5">★</label>
+              <input type="radio" id="star4" name="rating" value="4"><label for="star4">★</label>
+              <input type="radio" id="star3" name="rating" value="3"><label for="star3">★</label>
+              <input type="radio" id="star2" name="rating" value="2"><label for="star2">★</label>
+              <input type="radio" id="star1" name="rating" value="1"><label for="star1">★</label>
+            </div>
+            <br>
+            <button id="submitRatingBtn" type="button">Submit Rating</button>
+        </div>
+
+  </section>
+
+    <div class="profile-card" id="daily-log">
+          <h2>Today's Log</h2>
+            <p>Today's Rating: <span id="todayRating">Not Rated</span></p>
+          <table id="dailyTable">
+          <tr><th>Type</th><th>Value</th></tr>
+          </table>
+        </div>
+ 
+  
+        </main>
+<script>
+  // Simulated backend (for testing without server)
+  let goals = { calories: 2000, water: 3000 };
+  let today = { calories: [], water: [], rating: null };
+
+  const calBar = document.getElementById("calorieProgress");
+  const waterBar = document.getElementById("waterProgress");
+  const table = document.getElementById("dailyTable");
+  const badge = document.getElementById("statusBadge");
+
+  const totalCalories = document.getElementById("totalCalories");
+  const totalWater = document.getElementById("totalWater");
+  const addCalories = document.getElementById("addCalories");
+
+  function updateUI() {
+    const calSum = today.calories.reduce((a,b)=>a+b,0);
+    const waterSum = today.water.reduce((a,b)=>a+b,0);
+
+    calBar.style.width = (calSum/goals.calories*100)+"%";
+    waterBar.style.width = (waterSum/goals.water*100)+"%";
+
+    // Badge logic
+    let calPercent = calSum/goals.calories;
+    badge.className = "badge animate " + 
+      (calPercent > 1 ? "red" : calPercent > 0.7 ? "green" : "yellow");
+    badge.innerText = calPercent > 1 ? "Over Limit" : calPercent > 0.7 ? "On Track" : "Needs Attention";
+
+    // Table
+    table.innerHTML = "<tr><th>Type</th><th>Value</th></tr>";
+    today.calories.forEach(c=>table.innerHTML+=`<tr><td>Calories</td><td>${c}</td></tr>`);
+    today.water.forEach(w=>table.innerHTML+=`<tr><td>Water</td><td>${w} ml</td></tr>`);
+
+    // Rating
+    document.getElementById("todayRating").innerText = today.rating ? today.rating+" ★" : "Not Rated";
+  }
+
+  // Event listeners
+  document.getElementById("addCaloriesBtn").onclick = () => {
+    let val = parseInt(addCalories.value);
+    if(!val) return alert("Enter calories");
+    today.calories.push(val);
+    addCalories.value = "";
+    updateUI();
+  };
+
+  document.getElementById("addWaterBtn").onclick = () => {
+    today.water.push(250);
+    updateUI();
+  };
+
+  document.getElementById("changeCaloriesBtn").onclick = () => {
+    totalCalories.disabled = false;
+    totalCalories.focus();
+  };
+  totalCalories.onblur = () => {
+    totalCalories.disabled = true;
+    goals.calories = parseInt(totalCalories.value);
+    updateUI();
+  };
+
+  document.getElementById("changeWaterBtn").onclick = () => {
+    totalWater.disabled = false;
+    totalWater.focus();
+  };
+  totalWater.onblur = () => {
+    totalWater.disabled = true;
+    goals.water = parseInt(totalWater.value);
+    updateUI();
+  };
+
+  document.getElementById("submitRatingBtn").onclick = () => {
+    const r = document.querySelector('input[name="rating"]:checked')?.value;
+    if(!r) return alert("Select rating");
+    today.rating = r;
+    updateUI();
+  };
+
+  updateUI(); // initial call
+</script>
+
+</body>
+</html>
