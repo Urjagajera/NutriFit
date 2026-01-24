@@ -1,0 +1,413 @@
+* {
+  margin: 0;
+  padding: 0;
+  font-family: Arial, sans-serif;
+}
+
+body {
+  background: #f5f7fa;
+  justify-content: center;
+  align-items: center;
+}
+
+.login-container {
+  background: #ffffff; 
+  padding: 50px;
+  border-radius: 10px;
+  height: 400px;
+  width:500px;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+  margin: 100px auto;
+}
+
+.login-container h2 {
+  text-align: center;
+  margin-bottom: 5px;
+  color: #2c3e50;
+}
+
+.subtitle {
+  text-align: center;
+  margin-bottom: 20px;
+  color: #7f8c8d;
+}
+
+label {
+  display: block;
+  margin-top: 15px;
+  font-size: 14px;
+}
+
+input {
+  width: 100%;
+  padding: 10px;
+  margin-top: 5px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+}
+
+button {
+  width: 100%;
+  margin-top: 20px;
+  padding: 10px;
+  background: #27ae60;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+button:hover {
+  background: #219150;
+}
+
+.link {
+  text-align: center;
+  margin-top: 15px;
+  font-size: 14px;
+}
+
+.link a {
+  color: #27ae60;
+  text-decoration: none;
+}
+
+/*focus*/
+.focus-option {
+  display: flex;
+  align-items: center;
+  margin-top: 15px;
+  font-size: 16px;
+}
+
+/*--------------Dashboard----------------*/
+#dashboard-page {
+  padding: 30px 40px;
+}
+
+/* ADMIN SECTION */
+#admin-section {
+  background: #ffffff;
+  padding: 25px;
+  border-radius: 12px;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.06);
+  margin-bottom: 30px;
+}
+
+#admin-section h2 {
+  margin-bottom: 5px;
+}
+
+#admin-title {
+  font-weight: 500;
+  color: #555;
+}
+
+#admin-achievements {
+  margin-top: 8px;
+  color: #666;
+}
+
+/* CARDS */
+#dashboard-cards {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 25px;
+}
+
+.dashboard-card {
+  background: #ffffff;
+  padding: 25px;
+  border-radius: 12px;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.06);
+  width: 420px;
+  height:110px;
+}
+
+.dashboard-card h3 {
+  margin-bottom: 10px;
+}
+
+.button:hover {
+  background: #0a6832;
+}
+
+.dashboard-card button {
+  margin-top: 15px;
+  padding: 10px;
+  width: 420px;
+  height: 35px;
+
+}
+
+
+/*-----------------quize---------------*/
+select {
+  width: 100%;
+  padding: 10px;
+  margin-top: 5px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+}
+
+
+/*---------------- quize  focus ----------------*/
+.focus-container , .quize{
+  background: #ffffff; 
+  padding: 50px;
+  border-radius: 10px;
+  height: auto;
+  width:500px;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+  margin: 100px auto;
+}
+
+.focus-container h2 , .quize h2 {
+  text-align: center;
+  margin-bottom: 5px;
+  color: #2c3e50;
+}
+
+
+
+
+.focus-option{
+  text-align: center;
+justify-content: center;
+}
+
+/*---------------NAVBAR------------------*/
+#navbar {
+  margin-top: 0;
+  display: flex;
+  padding: 15px 40px;
+  background: #ffffff;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+
+}
+
+#navbar a {
+  margin-left: 20px;
+  text-decoration: none;
+  color: #333;
+}
+
+
+/*-------------profile--------------*/
+
+#profile-page {
+  padding: 30px 40px;
+}
+
+#profile-header {
+  margin: 0;
+    gap: 40px;
+     padding: 25px;
+}
+
+#personal-details {
+  font-size: large;
+}
+
+#profile-header h1 {
+  margin-bottom: 10px;
+}
+
+#profile-content {
+  margin-top: 30px;
+  background: #fff;
+  padding: 25px;
+  border-radius: 10px;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.06);
+  gap: 40px;
+}
+
+.badge {
+  padding: 6px 12px;
+  border-radius: 20px;
+  font-size: 14px;
+  font-weight: bold;
+}
+.green { background: #d4f8d4; color: #1f7a1f; }
+.yellow { background: #fff3cd; color: #856404; }
+.red { background: #f8d7da; color: #721c24; }
+
+ .animate { animation: pulse 0.5s ease; }
+     @keyframes pulse { from { transform: scale(1); } to { transform: scale(1.05); } }
+
+table { width: 500px; border-collapse: collapse; margin-top: 10px; }
+    th, td { border: 1px solid #ccc; padding: 5px; text-align: center; }
+    th { background: #f5f5f5; }
+
+
+.calorie-tracker,.water-tracker, .rate-day {
+  margin-top: 30px;
+
+}
+
+#btn-water-250, #changeCaloriesBtn, #addCaloriesBtn,
+#submitRatingBtn, #changeWaterBtn, #addWaterBtn {
+  margin-top: 10px;
+  padding: 10px;
+  margin-bottom: 15px;
+  background: #27ae60;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  width: 200px
+}
+
+#totalCalories, #addCalories, #totalWater {
+  width: 180px;
+}
+#btn-water-250:hover, #changeCaloriesBtn:hover, #addCaloriesBtn:hover,
+#submitRatingBtn:hover, #changeWaterBtn:hover, #addWaterBtn:hover {
+  background: #219150;
+}
+
+.progress {
+  width: 400px;
+  height: 10px;
+  background: #ddd;
+  border-radius: 10px;
+  margin-bottom: 10px;
+  margin-top: 20px;
+}
+
+.progress-fill {
+  height: 100%;
+   background: #2196f3;
+  border-radius: 10px;
+  width: 0%;
+  transition: width 0.5s;
+}
+
+.progress-fill.blue {
+  background: #2196f3;
+}
+
+.rating {
+  direction: rtl;
+  display: inline-flex;
+  font-size: 40px;
+}
+
+.rating input {
+  display: none;
+}
+
+.rating label {
+  color: #ccc;
+  cursor: pointer;
+   font-size: 28px;
+}
+
+.rating label:hover,
+.rating label:hover ~ label,
+.rating input:checked ~ label {
+  color: gold;
+}
+
+#daily-tracker {
+  display: flex;
+  gap: 20px;
+  flex-direction: row;
+  justify-content: center;
+}
+
+.profile-card {
+  background: #ffffff;
+  padding: 25px;
+  margin: 20px;
+  border-radius: 12px;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.06);
+  width: 545px;
+  height:auto;
+  text-align: center;
+  justify-items: center;
+}
+
+.profile-card h2 {
+  margin-bottom: 60px;
+}
+
+
+
+
+/*--------------ADMIN PAGE----------------*/
+#admin-page {
+  padding: 30px 40px;
+}
+
+.dashboard-container {
+  max-width: 1200px;
+  margin: 40px auto;
+  padding: 20px;
+}
+.dashboard-container h2 {
+  font-size: 30px;
+  margin-bottom: 8px;
+}
+
+.subtitle {
+  font-size: 16px;
+  color: #666;
+  margin-bottom: 30px;
+}
+
+.card-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+  gap: 25px;
+}
+
+.card {
+  background: #ffffff;
+  padding: 22px;
+  border-radius: 14px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+  display: flex;
+  flex-direction: column;
+  height: 200px;
+  gap: 12px;
+}
+
+.card h3 {
+  font-size: 20px;
+}
+
+.card p {
+  font-size: 14px;
+  color: #555;
+}
+
+.card select {
+  padding: 10px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  font-size: 14px;
+  outline: none;
+}
+
+.card select:focus {
+  border-color: #4caf50;
+}
+
+/* BUTTON */
+.card button {
+  margin-top: auto;
+  padding: 10px;
+  border: none;
+  border-radius: 10px;
+  background-color: #4caf50;
+  color: #fff;
+  font-size: 14px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.card button:hover {
+  background-color: #0d7b12;
+}
+

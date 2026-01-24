@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>NutriFit | Admin Dashboard</title>
+  <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+
+  <div class="dashboard-container" id="admin-page">
+    <h2>Admin Dashboard </h2>
+    <p class="subtitle">Manage users, plans & progress</p>
+
+    <div class="card-grid">
+
+      <!-- View Users -->
+      <div class="card">
+        <h3>👥 Users</h3>
+        <p>View all registered users</p>
+        <button>View Users</button>
+      </div>
+
+      <!-- Upload Diet Plan -->
+      <div class="card">
+        <h3>🥗 Upload Diet Plan</h3>
+        <p>Upload Word file for a specific user</p>
+
+        <!-- Select Client -->
+        <select name="user_id" id="diet-user-select">
+          <option value="">-- Select Client by Name --</option>
+          <option value="1">Urja Gajera (urja@gmail.com)</option>
+          <option value="2">Aditi Patel (aditi@gmail.com)</option>
+          <option value="3">Riya Shah (riya@gmail.com)</option>
+        </select>
+  
+        <button>Upload File</button>
+      </div>
+
+      <!-- Upload Workout Plan -->
+      <div class="card">
+        <h3>🏋️ Upload Workout Plan</h3>
+        <p>Upload workout routine for a specific user</p>
+
+        <!-- Select Client -->
+        <select name="user_id" id="workout-user-select">
+          <option value="">-- Select Client by Name --</option>
+          <option value="1">Urja Gajera (urja@gmail.com)</option>
+          <option value="2">Aditi Patel (aditi@gmail.com)</option>
+          <option value="3">Riya Shah (riya@gmail.com)</option>
+        </select>
+
+      <button>Upload File</button>
+      </div>
+
+      <!-- View Progress -->
+      <div class="card">
+        <h3>📈 User Progress</h3>
+        <p>Ratings, water & adherence</p>
+        <button>View Progress</button>
+      </div>
+
+      <!-- Reports -->
+      <div class="card">
+        <h3>📊 Reports</h3>
+        <p>Weekly & monthly reports</p>
+        <button>Download</button>
+      </div>
+
+
+    </div>
+  </div>
+
+</body>
+</html>
