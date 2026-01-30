@@ -11,23 +11,26 @@
     <h2>Choose Your Focus</h2>
     <p class="subtitle">What do you want to work on?</p>
 
-  <form>
+    <form id="focusForm">
 
-  <div class="focus-option">
-    <label for="focus-select"><strong>Select Your Focus</strong></label>
-  
-    <select id="focusSelect" name="focus" id="focus-select" required>
-      <option value="">-- Choose an option --</option>
-      <option value="diet" id="focus-diet">Diet</option>
-      <option value="fitness" id="focus-fitness">Fitness</option>
-      <option value="both" id="focus-both">Both</option>
-    </select>
+      <div class="focus-option">
+        <label for="focusSelect"><strong>Select Your Focus</strong></label>
+
+        <select name="focus" id="focusSelect" required>
+          <option value="">-- Choose an option --</option>
+          <option value="diet">Diet</option>
+          <option value="fitness">Fitness</option>
+          <option value="both">Both</option>
+        </select>
+      </div>
+
+      <button type="submit" id="focusContinueBtn">Continue</button>
+
+    </form>
   </div>
 
-  <button id="focusBtn" type="submit">Continue</button>
-
-</form>
-  </div>
-
+  <!-- JS -->
+  <script src="js/session.js"></script>
+  <script src="js/focus.js"></script>
 </body>
 </html>
