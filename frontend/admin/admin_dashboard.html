@@ -8,67 +8,68 @@
 <body>
 
   <div class="dashboard-container" id="admin-page">
-    <h2>Admin Dashboard </h2>
+    <h2 id="admin-title">Admin Dashboard</h2>
     <p class="subtitle">Manage users, plans & progress</p>
+
+    <button id="admin-logout" style="float:right">Logout</button>
 
     <div class="card-grid">
 
       <!-- View Users -->
-      <div class="card">
+      <div class="card" id="card-users">
         <h3>👥 Users</h3>
         <p>View all registered users</p>
-        <button>View Users</button>
+        <button id="btn-view-users">View Users</button>
       </div>
 
       <!-- Upload Diet Plan -->
-      <div class="card">
+      <div class="card" id="card-diet">
         <h3>🥗 Upload Diet Plan</h3>
         <p>Upload Word file for a specific user</p>
 
-        <!-- Select Client -->
-        <select name="user_id" id="diet-user-select">
+        <select id="diet-user-select">
           <option value="">-- Select Client by Name --</option>
           <option value="1">Urja Gajera (urja@gmail.com)</option>
           <option value="2">Aditi Patel (aditi@gmail.com)</option>
           <option value="3">Riya Shah (riya@gmail.com)</option>
         </select>
-  
-        <button>Upload File</button>
+
+        <button id="btn-upload-diet">Upload File</button>
       </div>
 
       <!-- Upload Workout Plan -->
-      <div class="card">
+      <div class="card" id="card-workout">
         <h3>🏋️ Upload Workout Plan</h3>
         <p>Upload workout routine for a specific user</p>
 
-        <!-- Select Client -->
-        <select name="user_id" id="workout-user-select">
+        <select id="workout-user-select">
           <option value="">-- Select Client by Name --</option>
           <option value="1">Urja Gajera (urja@gmail.com)</option>
           <option value="2">Aditi Patel (aditi@gmail.com)</option>
           <option value="3">Riya Shah (riya@gmail.com)</option>
         </select>
 
-      <button>Upload File</button>
+        <button id="btn-upload-workout">Upload File</button>
       </div>
 
       <!-- View Progress -->
-      <div class="card">
+      <div class="card" id="card-progress">
         <h3>📈 User Progress</h3>
         <p>Ratings, water & adherence</p>
-        <button>View Progress</button>
+        <button id="btn-view-progress">View Progress</button>
       </div>
 
       <!-- Reports -->
-      <div class="card">
+      <div class="card" id="card-reports">
         <h3>📊 Reports</h3>
         <p>Weekly & monthly reports</p>
-        <button>Download</button>
+        <button id="btn-download-reports">Download</button>
       </div>
-
 
     </div>
   </div>
 
+<script src="../js/session.js"></script>
+<script src="admin_dashboard.js"></script>
 </body>
 </html>
