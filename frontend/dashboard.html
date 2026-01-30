@@ -8,22 +8,20 @@
 <body>
 
 <nav id="navbar">
-  
-    <h2 id="app-name">NutriFit</h2>
-  <a href="profile.html" id="nav-profile">👤</a>
-    <a href="#" id="nav-logout">Logout</a>
- 
+  <h2 id="app-name">NutriFit</h2>
+  <a href="profile.html" id="navProfile">👤</a>
+  <a href="#" id="navLogout">Logout</a>
 </nav>
 
 <main id="dashboard-page">
 
-  <!-- ADMIN INFO -->
+  <!-- ADMIN / COACH INFO -->
   <section id="admin-section">
-    <h2 id="admin-name">Coach Ruchi Gajera</h2>
-    <p id="admin-title">
+    <h2 id="coachName">Coach Ruchi Gajera</h2>
+    <p id="coachTitle">
       Certified Diet & Fitness Coach | 5+ Years Experience
     </p>
-    <p id="admin-achievements">
+    <p id="coachAchievements">
       Worked with 300+ clients • Weight Loss • Muscle Gain • Lifestyle Improvement
     </p>
   </section>
@@ -31,33 +29,36 @@
   <!-- DASHBOARD CARDS -->
   <section id="dashboard-cards">
 
-    <div class="dashboard-card" id="card-profile">
+    <div class="dashboard-card" id="cardProfile">
       <h3>👤 Profile</h3>
       <p>View your personal details & trackers</p>
-      <button id="btn-profile">Open</button>
+      <button id="btnProfile">Open</button>
     </div>
 
-    <div class="dashboard-card" id="card-diet">
+    <div class="dashboard-card" id="cardDiet">
       <h3>🥗 Diet Plan</h3>
       <p>View your assigned diet plan</p>
-      <button id="btn-diet">View</button>
+      <button id="btnDiet">View</button>
     </div>
 
-    <div class="dashboard-card" id="card-workout">
+    <div class="dashboard-card" id="cardWorkout">
       <h3>🏋️ Workout Plan</h3>
       <p>View your workout routine</p>
-      <button id="btn-workout">View</button>
+      <button id="btnWorkout">View</button>
     </div>
 
-    <div class="dashboard-card" id="card-reports">
+    <div class="dashboard-card" id="cardReports">
       <h3>📊 Reports</h3>
       <p>Weekly & monthly progress</p>
-      <button id="btn-reports">View</button>
+      <button id="btnReports">View</button>
     </div>
 
   </section>
 
 </main>
 
+<!-- JS -->
+<script src="js/session.js"></script>
+<script src="js/dashboard.js"></script>
 </body>
 </html>
