@@ -1,10 +1,10 @@
-SESSIONS = {}
+SESSION = {}
 
-def create_session(user_id):
-    SESSIONS["current_user"] = user_id
-
-def get_current_user():
-    return SESSIONS.get("current_user")
+def login(user_id):
+    SESSION["user_id"] = user_id
 
 def logout():
-    SESSIONS.clear()
+    SESSION.clear()
+
+def current_user():
+    return SESSION.get("user_id")
