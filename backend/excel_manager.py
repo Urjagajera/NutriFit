@@ -3,31 +3,42 @@ import os
 from datetime import date
 
 DATA_DIR = "backend/data"
+USERS_FILE = os.path.join(DATA_DIR, "users.xlsx")
 
-def get_user_file(user_id):
-    return os.path.join(DATA_DIR, f"user_{user_id}.xlsx")
+os.makedirs(DATA_DIR, exist_ok=True)
 
+def init_users_file():
+    if not os.path.exists(USERS_FILE):
+        df = pd.DataFrame(columns=[
+            "user_id", "email", "password", "focus",
+            "age", "gender", "height", "weight",
+            "food", "sleep", "medical"
+        ])
+        df.to_excel(USERS_FILE, index=False)
 
-def create_user_excel(user_id):
-    path = get_user_file(user_id)
+def create_user(email, password):
+    init_users_file()
+    df = pd.read_excel(USERS_FILE)
+    user_id = len(df) + 1
+    df.loc[len(df)] = [user_id, email, password, "", "", "", "", "", "", "", ""]
+    df.to_excel(USERS_FILE, index=False)
+    create_user_file(user_id)
+    return user_id
+
+def create_user_file(user_id):
+    path = os.path.join(DATA_DIR, f"user_{user_id}.xlsx")
     if not os.path.exists(path):
-        df = pd.DataFrame(columns=["date", "calories", "water_ml", "rating"])
-        df.to_excel(path, index=False)
+        pd.DataFrame(columns=["date", "calories", "water", "rating"]).to_excel(path, index=False)
 
+def save_quiz(user_id, data):
+    df = pd.read_excel(USERS_FILE)
+    idx = df[df["user_id"] == user_id].index[0]
 
-def update_daily_data(user_id, calories=0, water=0, rating=None):
-    path = get_user_file(user_id)
-    today = str(date.today())
+    for key in data:
+        df.loc[idx, key] = data[key]
 
-    df = pd.read_excel(path)
+    df.to_excel(USERS_FILE, index=False)
 
-    if today in df["date"].values:
-        idx = df[df["date"] == today].index[0]
-        df.loc[idx, "calories"] += calories
-        df.loc[idx, "water_ml"] += water
-        if rating:
-            df.loc[idx, "rating"] = rating
-    else:
-        df.loc[len(df)] = [today, calories, water, rating]
-
-    df.to_excel(path, index=False)
+def get_all_users():
+    init_users_file()
+    return pd.read_excel(USERS_FILE)
