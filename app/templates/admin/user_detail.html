@@ -1,0 +1,156 @@
+{% extends "base_admin.html" %}
+
+{% block title %}Admin | {{ user.full_name }}{% endblock %}
+
+{% block content %}
+<section class="container" style="padding-top: 120px;">
+    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 3rem;">
+        <div>
+            <a href="{{ url_for('admin.dashboard') }}"
+                style="color: var(--accent); text-decoration: none; font-size: 0.9rem; margin-bottom: 1rem; display: block;">←
+                Back to Users</a>
+            <h1 style="font-family: 'Playfair Display', serif; font-size: 3rem;">{{ user.full_name }}</h1>
+        </div>
+        <div style="text-align: right;">
+            <span class="section-tag" style="text-align: right;">Focus: {{ user.focus | capitalize or 'N/A' }}</span>
+        </div>
+    </div>
+
+    <!-- Analytics Integration -->
+    <div class="dashboard-grid" style="margin-bottom: 3rem;">
+        <div class="feature-card" style="text-align: left;">
+            <h3 style="margin-bottom: 1.5rem;">Hydration Trend</h3>
+            <canvas id="waterChart" style="max-height: 200px;"></canvas>
+        </div>
+        <div class="feature-card" style="text-align: left;">
+            <h3 style="margin-bottom: 1.5rem;">Weight Progress</h3>
+            <canvas id="weightChart" style="max-height: 200px;"></canvas>
+        </div>
+    </div>
+
+    <div class="dashboard-grid">
+        <!-- Biometrics -->
+        <div class="feature-card" style="text-align: left;">
+            <h3 style="margin-bottom: 1.5rem;">Biometric Assessment</h3>
+            {% if profile %}
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem;">
+                <div>
+                    <p style="font-size: 0.8rem; color: var(--text-muted);">BMI</p>
+                    <p style="font-size: 1.5rem; font-weight: 700; color: var(--accent);">{{ profile.bmi }}</p>
+                </div>
+                <div>
+                    <p style="font-size: 0.8rem; color: var(--text-muted);">BMR</p>
+                    <p style="font-size: 1.5rem; font-weight: 700; color: var(--accent);">{{ profile.bmr | int }}</p>
+                </div>
+                <div>
+                    <p style="font-size: 0.8rem; color: var(--text-muted);">Weight</p>
+                    <p>{{ profile.weight }} kg</p>
+                </div>
+                <div>
+                    <p style="font-size: 0.8rem; color: var(--text-muted);">Height</p>
+                    <p>{{ profile.height }} cm</p>
+                </div>
+                <div>
+                    <p style="font-size: 0.8rem; color: var(--text-muted);">Primary Goal</p>
+                    <p style="text-transform: capitalize;">{{ profile.primary_goal | replace('_', ' ') }}</p>
+                </div>
+                <div>
+                    <p style="font-size: 0.8rem; color: var(--text-muted);">Food Habit</p>
+                    <p style="text-transform: capitalize;">{{ profile.food_habit }}</p>
+                </div>
+                <div style="grid-column: 1 / -1;">
+                    <p style="font-size: 0.8rem; color: var(--text-muted); margin-bottom: 0.5rem;">Medical History /
+                        Allergies</p>
+                    <p style="font-size: 0.9rem;">{{ profile.medical_conditions or 'None' }} / {{ profile.allergies or
+                        'None' }}</p>
+                </div>
+            </div>
+            {% else %}
+            <p style="color: var(--text-muted);">No profile assessment completed yet.</p>
+            {% endif %}
+        </div>
+
+        <!-- Assignments Panel -->
+        <div class="feature-card" style="text-align: left;">
+            <h3 style="margin-bottom: 2rem;">Manage Plans</h3>
+
+            <div style="margin-bottom: 2rem;">
+                <h4 style="font-size: 0.9rem; color: var(--text-muted); margin-bottom: 1rem;">Current Diet Plans</h4>
+                {% if diet_plans %}
+                <ul style="list-style: none; padding: 0;">
+                    {% for plan in diet_plans %}
+                    <li
+                        style="background: rgba(255,255,255,0.03); padding: 0.8rem; border-radius: 8px; margin-bottom: 0.5rem; display: flex; justify-content: space-between; align-items: center;">
+                        <span style="font-size: 0.85rem;">{{ plan.filename }}</span>
+                        <span style="font-size: 0.75rem; color: var(--text-muted);">{{
+                            plan.upload_date.strftime('%Y-%m-%d') if plan.upload_date else 'N/A' }}</span>
+                    </li>
+                    {% endfor %}
+                </ul>
+                {% else %}
+                <p style="font-size: 0.85rem; color: var(--text-muted);">No diet plans assigned.</p>
+                {% endif %}
+            </div>
+
+            <form action="{{ url_for('admin.assign_diet', user_id=user.id) }}" method="POST"
+                enctype="multipart/form-data">
+                <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+                <div style="display: flex; gap: 1rem;">
+                    <input type="file" name="diet_file" required
+                        style="flex-grow: 1; padding: 0.6rem; background: var(--glass); border: 1px solid var(--glass-border); border-radius: 12px; font-size: 0.8rem;">
+                    <button type="submit" class="btn btn-primary" style="padding: 0.6rem 1.5rem;">Upload</button>
+                </div>
+            </form>
+
+            <hr style="border: 0; border-top: 1px solid var(--glass-border); margin: 2rem 0;">
+
+            <form action="{{ url_for('admin.assign_workout', user_id=user.id) }}" method="POST">
+                <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+                <label
+                    style="display: block; margin-bottom: 0.8rem; font-size: 0.9rem; color: var(--text-muted);">Workout
+                    Link</label>
+                <div style="display: flex; gap: 1rem;">
+                    <input type="url" name="workout_link" required placeholder="https://youtube.com/..."
+                        style="flex-grow: 1; padding: 0.8rem; background: var(--glass); border: 1px solid var(--glass-border); border-radius: 12px; color: var(--text-main); font-family: inherit;">
+                    <button type="submit" class="btn btn-primary" style="padding: 0.8rem 1.5rem;">Assign</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</section>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+    const waterLabels = JSON.parse('{{ water_labels | tojson | safe }}');
+    const waterValues = JSON.parse('{{ water_values | tojson | safe }}');
+    const weightLabels = JSON.parse('{{ weight_labels | tojson | safe }}');
+    const weightValues = JSON.parse('{{ weight_values | tojson | safe }}');
+
+    const chartOptions = {
+        responsive: true,
+        plugins: { legend: { display: false } },
+        scales: {
+            y: { grid: { color: 'rgba(255,255,255,0.05)' }, ticks: { color: '#94a2b8' } },
+            x: { grid: { display: false }, ticks: { color: '#94a2b8' } }
+        }
+    };
+
+    new Chart(document.getElementById('waterChart'), {
+        type: 'bar',
+        data: {
+            labels: waterLabels,
+            datasets: [{ label: 'ml', data: waterValues, backgroundColor: 'rgba(59, 130, 246, 0.5)', borderColor: '#3b82f6', borderWidth: 2, borderRadius: 8 }]
+        },
+        options: chartOptions
+    });
+
+    new Chart(document.getElementById('weightChart'), {
+        type: 'line',
+        data: {
+            labels: weightLabels,
+            datasets: [{ label: 'kg', data: weightValues, borderColor: '#10b981', backgroundColor: 'rgba(16, 185, 129, 0.1)', fill: true, tension: 0.4 }]
+        },
+        options: chartOptions
+    });
+</script>
+{% endblock %}

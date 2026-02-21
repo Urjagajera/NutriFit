@@ -1,0 +1,125 @@
+{% extends "base_user.html" %}
+
+{% block title %}NutriFit | Your Health Dashboard{% endblock %}
+
+{% block content %}
+<section class="container" style="padding-top: 80px;">
+    <div style="display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 3rem;">
+        <div>
+            <span class="section-tag" style="text-align: left;">Welcome back, {{ user.full_name }}</span>
+            <h1 style="font-family: 'Playfair Display', serif; font-size: 3rem;">Your Cockpit</h1>
+        </div>
+        <div style="text-align: right;">
+            <p style="color: var(--text-muted); font-size: 0.9rem;">Current Focus</p>
+            <span class="btn btn-primary"
+                style="background: var(--primary-light); color: var(--accent); padding: 0.5rem 1.5rem; border: 1px solid var(--glass-border);">
+                {{ user.focus | capitalize }}
+            </span>
+        </div>
+    </div>
+
+    <!-- Biometric Stats -->
+    <div class="dashboard-grid">
+        <div class="stat-card">
+            <span class="stat-label">Body Mass Index</span>
+            <div class="stat-value">{{ profile.bmi }}</div>
+            <p style="font-size: 0.8rem; margin-top: 0.5rem; color: var(--text-muted);">
+                {{ profile.bmi_category }}
+            </p>
+        </div>
+        <div class="stat-card">
+            <span class="stat-label">Basal Metabolic Rate</span>
+            <div class="stat-value">{{ profile.bmr | int }} <span
+                    style="font-size: 1rem; color: var(--text-muted);">kcal</span></div>
+            <p style="font-size: 0.8rem; margin-top: 0.5rem; color: var(--text-muted);">Daily maintenance energy</p>
+        </div>
+        <div class="stat-card">
+            <span class="stat-label">Daily Commitment</span>
+            <div class="stat-value" style="text-transform: capitalize;">{{ profile.commitment_level }}</div>
+            <p style="font-size: 0.8rem; margin-top: 0.5rem; color: var(--text-muted);">Keep it up!</p>
+        </div>
+        <div class="stat-card">
+            <span class="stat-label">Latest Weight</span>
+            <div class="stat-value">{{ profile.weight or 'N/A' }} <span
+                    style="font-size: 1rem; color: var(--text-muted);">kg</span></div>
+            <p style="font-size: 0.8rem; margin-top: 0.5rem; color: var(--text-muted);">Maintain your goal</p>
+        </div>
+    </div>
+
+    <div class="dashboard-grid">
+        <!-- Water Tracker -->
+        <div class="feature-card water-widget">
+            <h3>Daily Hydration</h3>
+            <p style="color: var(--text-muted);">Goal: {{ water.goal | int }}ml</p>
+
+            <div class="water-tank">
+                <div class="water-level" id="water-level" style="height: {{ water_percent }}%;"></div>
+                <div class="water-percent-display" id="water-percent">{{ water_percent | int }}%</div>
+            </div>
+
+            <div class="stat-value">{{ water.consumed | int }} <span
+                    style="font-size: 1rem; color: var(--text-muted);">ml</span></div>
+
+            <div class="quick-actions">
+                <form action="{{ url_for('main.update_water') }}" method="POST">
+                    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+                    <input type="hidden" name="amount" value="250">
+                    <button type="submit" class="btn btn-outline" style="padding: 0.5rem 1rem;">+ 250ml</button>
+                </form>
+                <form action="{{ url_for('main.update_water') }}" method="POST">
+                    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+                    <input type="hidden" name="amount" value="500">
+                    <button type="submit" class="btn btn-outline" style="padding: 0.5rem 1rem;">+ 500ml</button>
+                </form>
+            </div>
+        </div>
+
+        <!-- Assignments -->
+        <div class="feature-card" style="text-align: left;">
+            <h3 style="margin-bottom: 2rem;">Latest Assignments</h3>
+
+            <div class="plan-card">
+                <h4 style="color: var(--accent); margin-bottom: 0.5rem;">Diet Plan</h4>
+                {% if diet %}
+                <p style="margin-bottom: 1rem;">{{ diet.filename }}</p>
+                <a href="{{ url_for('static', filename='uploads/' + user.id|string + '/diet_plans/' + diet.filename) }}"
+                    target="_blank" class="nav-link" style="color: var(--accent); font-weight: 600;">Download Report
+                    →</a>
+
+                {% else %}
+                <p style="color: var(--text-muted);">No diet plan assigned yet.</p>
+                {% endif %}
+            </div>
+
+            <div class="plan-card">
+                <h4 style="color: var(--accent); margin-bottom: 0.5rem;">Workout Regimen</h4>
+                {% if workout %}
+                <p style="margin-bottom: 1rem;">Video / Guide Link</p>
+                <a href="{{ workout.link }}" target="_blank" class="nav-link"
+                    style="color: var(--accent); font-weight: 600;">Open Workout →</a>
+                {% else %}
+                <p style="color: var(--text-muted);">No workout link assigned yet.</p>
+                {% endif %}
+            </div>
+
+            {% if previous_diets %}
+            <div style="margin-top: 2rem;">
+                <h4 style="font-size: 0.9rem; color: var(--text-muted); margin-bottom: 1rem;">Previous Diet Plans</h4>
+                <ul style="list-style: none; padding: 0;">
+                    {% for p_diet in previous_diets %}
+                    <li
+                        style="background: rgba(255,255,255,0.03); padding: 0.8rem; border-radius: 8px; margin-bottom: 0.5rem; display: flex; justify-content: space-between; align-items: center;">
+                        <span style="font-size: 0.85rem;">{{ p_diet.filename }}</span>
+                        <a href="{{ url_for('static', filename='uploads/' + user.id|string + '/diet_plans/' + p_diet.filename) }}"
+                            target="_blank"
+                            style="font-size: 0.75rem; color: var(--accent); text-decoration: none;">Download
+                            →</a>
+                    </li>
+                    {% endfor %}
+                </ul>
+            </div>
+            {% endif %}
+        </div>
+    </div>
+</section>
+{% endblock %}

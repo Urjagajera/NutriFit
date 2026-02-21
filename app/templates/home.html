@@ -1,0 +1,113 @@
+{% extends "base_user.html" %}
+
+{% block title %}NutriFit | Personal Home{% endblock %}
+
+{% block content %}
+<section class="container" style="padding-top: 120px;">
+    <div style="margin-bottom: 3rem;">
+        <span class="section-tag" style="text-align: left;">Account Overview</span>
+        <h1 style="font-family: 'Playfair Display', serif; font-size: 3rem;">Welcome Home, {{ user.full_name }}</h1>
+    </div>
+
+    <div class="dashboard-grid">
+        <!-- Profile Column -->
+        <div class="feature-card" style="text-align: left;">
+            <h3 style="margin-bottom: 1.5rem;">Your Bio-Profile</h3>
+            {% if profile %}
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem;">
+                <div>
+                    <p style="font-size: 0.8rem; color: var(--text-muted);">Age</p>
+                    <p style="font-weight: 600;">{{ profile.age }} yrs</p>
+                </div>
+                <div>
+                    <p style="font-size: 0.8rem; color: var(--text-muted);">Gender</p>
+                    <p style="font-weight: 600; text-transform: capitalize;">{{ profile.gender }}</p>
+                </div>
+                <div>
+                    <p style="font-size: 0.8rem; color: var(--text-muted);">Height</p>
+                    <p style="font-weight: 600;">{{ profile.height }} cm</p>
+                </div>
+                <div>
+                    <p style="font-size: 0.8rem; color: var(--text-muted);">Weight</p>
+                    <p style="font-weight: 600;">{{ profile.weight }} kg</p>
+                </div>
+                <div>
+                    <p style="font-size: 0.8rem; color: var(--text-muted);">Primary Goal</p>
+                    <p style="font-weight: 600; text-transform: capitalize;">{{ profile.primary_goal | replace('_', ' ')
+                        }}</p>
+                </div>
+                <div>
+                    <p style="font-size: 0.8rem; color: var(--text-muted);">Commitment</p>
+                    <p style="font-weight: 600; text-transform: capitalize;">{{ profile.commitment_level }}</p>
+                </div>
+                <!-- Health Considerations -->
+                <div
+                    style="grid-column: 1 / -1; margin-top: 1rem; padding-top: 1rem; border-top: 1px solid var(--glass-border);">
+                    <p style="font-size: 0.8rem; color: var(--text-muted); margin-bottom: 0.3rem;">Health Considerations
+                    </p>
+                    <p style="font-size: 0.9rem; margin-bottom: 0.5rem;">
+                        <strong style="color: var(--accent);">Allergies:</strong>
+                        {{ profile.allergies or 'None reported' }}
+                    </p>
+                    <p style="font-size: 0.9rem;">
+                        <strong style="color: var(--accent);">Medical Conditions:</strong>
+                        {{ profile.medical_conditions or 'None reported' }}
+                    </p>
+                </div>
+            </div>
+            {% else %}
+            <div
+                style="padding: 1rem; background: rgba(255,165,0,0.1); border-radius: 12px; border: 1px solid rgba(255,165,0,0.2);">
+                <p style="font-size: 0.9rem;">Your bio-profile is incomplete. Get started with your personalized
+                    assessment!</p>
+                <a href="{{ url_for('main.quiz') }}" class="nav-link"
+                    style="color: var(--accent); font-weight: 600; margin-top: 0.5rem; display: inline-block;">Start
+                    Quiz →</a>
+            </div>
+            {% endif %}
+        </div>
+
+        <!-- Metrics & Recommendations -->
+        <div class="feature-card" style="text-align: left;">
+            <h3 style="margin-bottom: 1.5rem;">Insights & Recommendations</h3>
+            {% if profile %}
+            <div style="margin-bottom: 2rem;">
+                <p style="font-size: 0.9rem; color: var(--text-muted); margin-bottom: 0.5rem;">Calculated Metrics</p>
+                <div style="display: flex; gap: 2rem;">
+                    <div>
+                        <span style="font-size: 2rem; font-weight: 700; color: var(--accent);">{{ profile.bmi }}</span>
+                        <p style="font-size: 0.75rem; color: var(--text-muted);">BMI ({{ profile.bmi_category }})</p>
+                    </div>
+                    <div>
+                        <span style="font-size: 2rem; font-weight: 700; color: var(--accent);">{{ profile.bmr | int
+                            }}</span>
+                        <p style="font-size: 0.75rem; color: var(--text-muted);">BMR (Basal Kcal)</p>
+                    </div>
+                </div>
+            </div>
+
+            <div>
+                <p style="font-size: 0.9rem; color: var(--text-muted); margin-bottom: 0.5rem;">Path Selection</p>
+                <div class="plan-card" style="margin-top: 0; padding: 1rem; background: rgba(16, 185, 129, 0.05);">
+                    <p style="font-size: 1.1rem; font-weight: 600; color: var(--accent);">{{ user.focus | capitalize }}
+                        Focused</p>
+                    <p style="font-size: 0.85rem; margin-top: 0.3rem;">Based on your choice, we've optimized your
+                        dashboard for {{ user.focus }} tracking.</p>
+                </div>
+            </div>
+            {% else %}
+            <p style="color: var(--text-muted);">Complete your assessment to unlock insights.</p>
+            {% endif %}
+        </div>
+    </div>
+
+    <!-- Quick Links -->
+    <div style="margin-top: 4rem; text-align: center;">
+        <h3 style="margin-bottom: 2rem;">Quick Access</h3>
+        <div style="display: flex; justify-content: center; gap: 1.5rem;">
+            <a href="{{ url_for('main.dashboard') }}" class="btn btn-primary">Go to Dashboard</a>
+            <a href="{{ url_for('main.reports') }}" class="btn btn-outline">View My Reports</a>
+        </div>
+    </div>
+</section>
+{% endblock %}
