@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}NutriFit | Elevate Your Health{% endblock %}</title>
+
+    <!-- Premium Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,700;1,700&display=swap"
+        rel="stylesheet">
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    {% block extra_css %}{% endblock %}
+</head>
+
+<body>
+    <header class="navbar" role="banner">
+        <nav class="container" role="navigation" aria-label="Main Navigation">
+            <div class="logo">
+                <a href="{{ url_for('main.index') }}">Nutri<span>Fit</span></a>
+            </div>
+            <ul class="nav-links">
+                <li><a href="{{ url_for('main.index') }}" class="nav-link">Home</a></li>
+                <li><a href="#" class="nav-link">About</a></li>
+                <li>
+                    <button id="theme-toggle" class="theme-toggle" aria-label="Toggle Theme">
+                        <span id="theme-icon">🌙</span>
+                    </button>
+                </li>
+                <li><a href="{{ url_for('auth.login') }}" class="btn btn-outline">Login</a></li>
+                <li><a href="{{ url_for('auth.register') }}" class="btn btn-primary">Join Now</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+        <div class="container" style="padding-top: 100px;">
+            {% for category, message in messages %}
+            <div class="alert alert-{{ category }}">{{ message }}</div>
+            {% endfor %}
+        </div>
+        {% endif %}
+        {% endwith %}
+
+        {% block content %}{% endblock %}
+    </main>
+
+    <footer class="footer" role="contentinfo">
+        <div class="container" style="text-align: center;">
+            <div style="margin-bottom: 2rem;">
+                <h2
+                    style="font-family: 'Playfair Display', serif; font-size: 2rem; margin-bottom: 0.5rem; color: var(--text-main);">
+                    Nutri<span>Fit</span></h2>
+                <p style="color: var(--text-muted); max-width: 400px; margin: 0 auto;">Elevating your life through
+                    personalized nutrition and data-driven fitness insights.</p>
+            </div>
+            <div style="display: flex; justify-content: center; gap: 2rem; margin-bottom: 2rem;">
+                <a href="#" class="nav-link" style="font-size: 0.8rem;">Privacy Policy</a>
+                <a href="#" class="nav-link" style="font-size: 0.8rem;">Terms of Service</a>
+                <a href="#" class="nav-link" style="font-size: 0.8rem;">Contact Us</a>
+            </div>
+            <p style="font-size: 0.75rem; color: var(--text-muted);">&copy; 2026 NutriFit Web Application. Built with
+                Passion for Health.</p>
+        </div>
+    </footer>
+
+    <script>
+        const themeToggle = document.getElementById('theme-toggle');
+        const themeIcon = document.getElementById('theme-icon');
+        const body = document.body;
+
+        const currentTheme = localStorage.getItem('theme') || 'light';
+        if (currentTheme === 'dark') {
+            body.setAttribute('data-theme', 'dark');
+            themeIcon.textContent = '☀️';
+        }
+
+        themeToggle.addEventListener('click', () => {
+            const isDark = body.getAttribute('data-theme') === 'dark';
+            if (isDark) {
+                body.removeAttribute('data-theme');
+                themeIcon.textContent = '🌙';
+                localStorage.setItem('theme', 'light');
+            } else {
+                body.setAttribute('data-theme', 'dark');
+                themeIcon.textContent = '☀️';
+                localStorage.setItem('theme', 'dark');
+            }
+        });
+    </script>
+    {% block scripts %}{% endblock %}
+</body>
+
+</html>

@@ -1,0 +1,51 @@
+{% extends "base_admin.html" %}
+
+{% block title %}NutriFit | Admin Dashboard{% endblock %}
+
+{% block content %}
+<section class="container" style="padding-top: 120px;">
+    <div style="margin-bottom: 3rem;">
+        <span class="section-tag" style="text-align: left;">Control Center</span>
+        <h1 style="font-family: 'Playfair Display', serif; font-size: 3rem;">User Management</h1>
+    </div>
+
+    <div class="feature-card" style="text-align: left; padding: 0; overflow: hidden;">
+        <table style="width: 100%; border-collapse: collapse; background: var(--glass);">
+            <thead>
+                <tr style="border-bottom: 1px solid var(--glass-border); background: rgba(255, 255, 255, 0.03);">
+                    <th
+                        style="padding: 1.5rem; text-align: left; font-size: 0.8rem; text-transform: uppercase; color: var(--text-muted);">
+                        Name</th>
+                    <th
+                        style="padding: 1.5rem; text-align: left; font-size: 0.8rem; text-transform: uppercase; color: var(--text-muted);">
+                        Email</th>
+                    <th
+                        style="padding: 1.5rem; text-align: left; font-size: 0.8rem; text-transform: uppercase; color: var(--text-muted);">
+                        Joined On</th>
+                    <th
+                        style="padding: 1.5rem; text-align: center; font-size: 0.8rem; text-transform: uppercase; color: var(--text-muted);">
+                        Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for user in users %}
+                <tr style="border-bottom: 1px solid var(--glass-border); transition: background 0.3s;"
+                    onmouseover="this.style.background='rgba(255,255,255,0.02)'"
+                    onmouseout="this.style.background='transparent'">
+                    <td style="padding: 1.5rem;">
+                        <span style="font-weight: 600;">{{ user.full_name }}</span>
+                    </td>
+                    <td style="padding: 1.5rem; color: var(--text-muted);">{{ user.email }}</td>
+                    <td style="padding: 1.5rem; color: var(--text-muted);">{{ user.created_at.strftime('%Y-%m-%d') }}
+                    </td>
+                    <td style="padding: 1.5rem; text-align: center;">
+                        <a href="{{ url_for('admin.user_detail', user_id=user.id) }}" class="btn btn-outline"
+                            style="padding: 0.5rem 1.2rem; font-size: 0.8rem;">View Details</a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</section>
+{% endblock %}

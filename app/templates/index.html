@@ -1,0 +1,71 @@
+{% extends "base.html" %}
+
+{% block title %}NutriFit | Personalized Health & Fitness Mastery{% endblock %}
+
+{% block content %}
+<section class="hero">
+    <div class="container"
+        style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 4rem; align-items: center; text-align: left; padding: 0 2rem;">
+        <div class="hero-content">
+            <span class="section-tag" style="text-align: left;">Welcome to NutriFit</span>
+            <h1
+                style="font-family: 'Playfair Display', serif; font-size: clamp(2rem, 5vw, 4rem); margin-bottom: 1.5rem; line-height: 1.1;">
+                Master Your Health with NutriFit</h1>
+            <p style="font-size: 1.1rem; color: var(--text-secondary); margin-bottom: 2.5rem; max-width: 600px;">The
+                ultimate personal companion for precision nutrition, tailored workouts, and daily habit tracking.
+                Elevate your lifestyle today with personalized guidance.</p>
+            <div class="hero-btns" style="justify-content: flex-start;">
+                <a href="{{ url_for('auth.register') }}" class="btn btn-primary">Start Your Journey</a>
+                <a href="#features" class="btn btn-outline">Explore Features</a>
+            </div>
+        </div>
+        <div class="hero-coach" style="text-align: center;">
+            <div style="position: relative; display: inline-block;">
+                <img src="https://images.unsplash.com/photo-1594824476967-48c8b964273f?q=80&w=1974&auto=format&fit=crop"
+                    alt="Ruchi - Certified Nutrition Coach"
+                    style="width: 100%; max-width: 400px; border-radius: 30px; box-shadow: 0 20px 40px rgba(0,0,0,0.2); border: 8px solid var(--glass-bg);">
+                <div
+                    style="background: var(--primary); color: white; padding: 1rem 2rem; border-radius: 15px; position: absolute; bottom: -20px; left: 50%; transform: translateX(-50%); width: 80%; box-shadow: 0 10px 20px rgba(0,0,0,0.1);">
+                    <h3 style="font-size: 1.1rem; margin-bottom: 0.2rem;">Ruchi</h3>
+                    <p style="font-size: 0.8rem; opacity: 0.9;">Certified Nutrition & Fitness Coach</p>
+                </div>
+            </div>
+            <p style="margin-top: 3rem; color: var(--text-secondary); font-style: italic; font-size: 0.95rem;">"My
+                mission is to empower you with data-driven nutrition and sustainable fitness habits."</p>
+        </div>
+    </div>
+</section>
+
+<section class="container">
+    <span class="section-tag">Premium Features</span>
+    <h2 class="section-title">Designed for Your Success</h2>
+
+    <div class="feature-grid">
+        <div class="feature-card">
+            <span class="feature-icon">🥑</span>
+            <h3>Precision Nutrition</h3>
+            <p>Custom diet plans crafted by experts, tailored to your body type, goals, and medical needs.</p>
+        </div>
+
+        <div class="feature-card">
+            <span class="feature-icon">💧</span>
+            <h3>Smart Hydration</h3>
+            <p>Track your daily water intake with interactive reports and smart goal reminders.</p>
+        </div>
+
+        <div class="feature-card">
+            <span class="feature-icon">⚡</span>
+            <h3>Dynamic Workouts</h3>
+            <p>Access high-quality workout regimens and links assigned specifically to your fitness level.</p>
+        </div>
+    </div>
+</section>
+
+<section class="container"
+    style="text-align: center; background: var(--primary-light); border-radius: 40px; margin-bottom: 4rem;">
+    <h2 class="section-title" style="margin-bottom: 1.5rem;">Ready to Transform?</h2>
+    <p style="color: var(--text-muted); margin-bottom: 2rem;">Join thousands of others who are already reaching their
+        goals with NutriFit.</p>
+    <a href="{{ url_for('auth.register') }}" class="btn btn-primary">Create Your Free Account</a>
+</section>
+{% endblock %}

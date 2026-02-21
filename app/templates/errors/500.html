@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+
+{% block title %}NutriFit | System Error{% endblock %}
+
+{% block content %}
+<section class="container"
+    style="padding-top: 150px; text-align: center; height: 70vh; display: flex; flex-direction: column; justify-content: center; align-items: center;">
+    <h1 style="font-family: 'Playfair Display', serif; font-size: 8rem; color: #ef4444; margin-bottom: 0;">500</h1>
+    <h2 style="font-family: 'Montserrat', sans-serif; margin-bottom: 2rem;">Our servers are taking a breather.</h2>
+    <p style="color: var(--text-muted); max-width: 500px; margin-bottom: 3rem;">Something went wrong on our end. We're
+        already working to get your fitness data back on track.</p>
+    <a href="{{ url_for('main.index') }}" class="btn btn-primary">Return to Home</a>
+</section>
+{% endblock %}
