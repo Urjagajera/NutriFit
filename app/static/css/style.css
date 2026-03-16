@@ -1,8 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,700;1,700&display=swap');
 
-/* ====================================================
-   1. CSS VARIABLES (Light/Dark theme)
-   ==================================================== */
+/* ------ 1. CSS VARIABLES (Light/Dark theme)---------- */
 :root {
 
     --bg-main: #eef1f4;
@@ -48,6 +46,7 @@
 }
 
 body {
+    margin-top: 90px;
     font-family: 'Montserrat', sans-serif;
     background-color: var(--bg-main);
     color: var(--text-primary);
@@ -353,6 +352,10 @@ ul {
     margin-top: 3rem;
 }
 
+.mt-20 {
+    margin-top: 20rem;
+}
+
 .mb-1 {
     margin-bottom: 1rem;
 }
@@ -478,10 +481,7 @@ footer {
     font-size: 0.9rem;
 }
 
-/* ====================================================
-   4. CARDS
-   ==================================================== */
-
+/*--------------- CARDS -------------------*/
 .coach-badge {
     max-width: 35%;
     margin-left: 25rem;
@@ -669,9 +669,7 @@ textarea:focus {
     color: var(--text-muted);
 }
 
-/* ====================================================
-   DASHBOARD COMPONENTS
-   ==================================================== */
+/* ---------------------- DASHBOARD COMPONENTS -----------*/
 .dashboard-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
