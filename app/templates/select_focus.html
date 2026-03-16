@@ -3,47 +3,40 @@
 {% block title %}NutriFit | Choose Your Path{% endblock %}
 
 {% block content %}
-<section class="container" style="padding-top: 15vh; text-align: center;">
+<section class="container pt-15vh text-center">
     <span class="section-tag">Phase 3: Initialization</span>
     <h1 class="section-title">What is your primary focus?</h1>
-    <p style="color: var(--text-muted); margin-bottom: 4rem; max-width: 600px; margin-inline: auto;">
+    <p class="text-muted mb-4 m-auto max-w-600">
         Select the path that best aligns with your goals. We'll tailor your experience based on this choice.
     </p>
 
     <form action="{{ url_for('main.select_focus') }}" method="POST" class="feature-grid">
         <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
-        <label class="feature-card" style="cursor: pointer; position: relative; transition: all 0.3s ease;">
-            <input type="radio" name="focus" value="diet" required style="position: absolute; opacity: 0;">
+        <label class="feature-card radio-card">
+            <input type="radio" name="focus" value="diet" required>
             <span class="feature-icon">🥗</span>
             <h3>Diet Focused</h3>
             <p>Personalized meal plans and nutrition tracking for optimal health.</p>
         </label>
 
-        <label class="feature-card" style="cursor: pointer; position: relative; transition: all 0.3s ease;">
-            <input type="radio" name="focus" value="workout" required style="position: absolute; opacity: 0;">
+        <label class="feature-card radio-card">
+            <input type="radio" name="focus" value="workout" required>
             <span class="feature-icon">🏋️</span>
             <h3>Workout Focused</h3>
             <p>Dynamic exercise regimens and strength training guidance.</p>
         </label>
 
-        <label class="feature-card" style="cursor: pointer; position: relative; transition: all 0.3s ease;">
-            <input type="radio" name="focus" value="both" required style="position: absolute; opacity: 0;">
+        <label class="feature-card radio-card">
+            <input type="radio" name="focus" value="both" required>
             <span class="feature-icon">🔥</span>
             <h3>Total Transformation</h3>
             <p>The ultimate combination of diet and workout for maximum results.</p>
         </label>
 
-        <div style="grid-column: 1 / -1; margin-top: 3rem;">
-            <button type="submit" class="btn btn-primary" style="padding: 1rem 4rem;">Continue to Quiz</button>
+        <div class="mt-3 grid-col-full">
+            <button type="submit" class="btn btn-primary">Continue to Quiz</button>
         </div>
     </form>
 </section>
 
-<style>
-    .feature-card:has(input:checked) {
-        border-color: var(--accent);
-        background: rgba(16, 185, 129, 0.1);
-        transform: translateY(-10px);
-    }
-</style>
 {% endblock %}

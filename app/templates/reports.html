@@ -3,11 +3,11 @@
 {% block title %}NutriFit | Progress Reports{% endblock %}
 
 {% block content %}
-<section class="container" style="padding-top: 80px;">
-    <div style="margin-bottom: 3rem; display: flex; justify-content: space-between; align-items: flex-end;">
+<section class="container pt-80">
+    <div class="d-flex justify-between align-center mb-4">
         <div>
-            <span class="section-tag" style="text-align: left;">Analytics</span>
-            <h1 style="font-family: 'Playfair Display', serif; font-size: 3rem;">Your Progress</h1>
+            <span class="section-tag text-left">Analytics</span>
+            <h1 class="section-title text-left mb-0">Your Progress</h1>
         </div>
         <button onclick="document.getElementById('weightModal').style.display='flex'" class="btn btn-primary">Log New
             Weight</button>
@@ -15,40 +15,36 @@
 
     <div class="dashboard-grid">
         <!-- Water Trend Chart -->
-        <div class="feature-card" style="text-align: left;">
-            <h3 style="margin-bottom: 1.5rem;">Hydration Trend (Last 7 Days)</h3>
-            <canvas id="waterChart" style="max-height: 300px;"></canvas>
+        <div class="feature-card text-left">
+            <h3 class="mb-2">Hydration Trend (Last 7 Days)</h3>
+            <canvas id="waterChart" class="chart-h-300"></canvas>
         </div>
 
         <!-- Weight Trend Chart -->
-        <div class="feature-card" style="text-align: left;">
-            <h3 style="margin-bottom: 1.5rem;">Weight Progress</h3>
-            <canvas id="weightChart" style="max-height: 300px;"></canvas>
+        <div class="feature-card text-left">
+            <h3 class="mb-2">Weight Progress (Last 10 Logs)</h3>
+            <canvas id="weightChart" class="chart-h-300"></canvas>
         </div>
     </div>
 
     <!-- Weight Entry Modal -->
-    <div id="weightModal"
-        style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); backdrop-filter: blur(8px); z-index: 2000; justify-content: center; align-items: center;">
-        <div class="feature-card"
-            style="max-width: 400px; width: 90%; text-align: left; background: var(--bg-secondary); border: 1px solid var(--border-color); padding: 2rem;">
-            <h3 style="margin-bottom: 1rem;">Update Weight</h3>
-            <p style="color: var(--text-muted); margin-bottom: 2rem; font-size: 0.9rem;">Track your transformation over
+    <div id="weightModal" class="modal-overlay">
+        <div class="feature-card modal-content text-left">
+            <span class="section-tag text-left">Actions</span>
+            <h3 class="mb-1">Log New Metric</h3>
+            <p class="text-muted mb-2 fs-md">Track your transformation over
                 time.</p>
             <form action="{{ url_for('main.log_weight') }}" method="POST">
                 <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
-                <div style="margin-bottom: 2rem;">
-                    <label
-                        style="display: block; margin-bottom: 0.5rem; font-size: 0.8rem; color: var(--text-muted);">Current
+                <div class="text-left">
+                    <label class="text-muted mb-1 d-block fs-sm">Current
                         Weight (kg)</label>
-                    <input type="number" step="0.1" name="weight" required
-                        style="width: 100%; padding: 0.8rem; background: var(--bg-main); border: 1px solid var(--border-color); border-radius: 12px; color: var(--text-primary); font-family: inherit;">
+                    <input type="number" step="0.1" name="weight" required class="quiz-input p-1">
                 </div>
-                <div style="display: flex; gap: 1rem;">
-                    <button type="submit" class="btn btn-primary" style="flex: 1;">Save Entry</button>
+                <div class="d-flex gap-1">
+                    <button type="submit" class="btn btn-primary w-100">Save Entry</button>
                     <button type="button" onclick="document.getElementById('weightModal').style.display='none'"
-                        class="btn btn-outline"
-                        style="flex: 1; border-color: var(--text-muted); color: var(--text-muted);">Cancel</button>
+                        class="btn btn-outline text-muted w-100">Cancel</button>
                 </div>
             </form>
         </div>

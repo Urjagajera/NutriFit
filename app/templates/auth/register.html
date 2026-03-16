@@ -3,51 +3,39 @@
 {% block title %}NutriFit | Create Your Account{% endblock %}
 
 {% block content %}
-<section class="container"
-    style="padding-top: 15vh; min-height: 80vh; display: flex; justify-content: center; align-items: center;">
-    <div class="feature-card" style="max-width: 500px; width: 100%; text-align: left;">
-        <span class="section-tag" style="text-align: left;">Join the Community</span>
-        <h2 style="font-family: 'Playfair Display', serif; font-size: 2.5rem; margin-bottom: 2rem;">Get Started</h2>
-
+<section class="container pt-15vh d-flex justify-center align-center min-h-80vh">
+    <div class="feature-card modal-content text-left max-w-500">
+        <span class="section-tag">Membership</span>
+        <h2 class="section-title text-left mb-2 fs-xl">Get Started</h2>
         <form action="{{ url_for('auth.register') }}" method="POST">
             <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
-            <div style="margin-bottom: 1.5rem;">
-                <label for="full_name"
-                    style="display: block; margin-bottom: 0.5rem; font-size: 0.9rem; color: var(--text-muted);">Full
+            <div class="mb-1">
+                <label for="full_name" class="text-muted mb-1 d-block fs-md">Full
                     Name</label>
-                <input type="text" id="full_name" name="full_name" placeholder="John Doe" required
-                    style="width: 100%; padding: 0.8rem 1rem; background: var(--glass); border: 1px solid var(--glass-border); border-radius: 12px; color: var(--text-main); font-family: inherit;">
+                <input type="text" name="full_name" id="full_name" required class="quiz-input" placeholder="John Doe">
             </div>
-
-            <div style="margin-bottom: 1.5rem;">
-                <label for="email"
-                    style="display: block; margin-bottom: 0.5rem; font-size: 0.9rem; color: var(--text-muted);">Email
+            <div class="mb-1">
+                <label for="email" class="text-muted mb-1 d-block fs-md">Email
                     Address</label>
-                <input type="email" id="email" name="email" placeholder="john@example.com" required
-                    style="width: 100%; padding: 0.8rem 1rem; background: var(--glass); border: 1px solid var(--glass-border); border-radius: 12px; color: var(--text-main); font-family: inherit;">
+                <input type="email" name="email" id="email" required class="quiz-input" placeholder="john@example.com">
             </div>
-
-            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 2rem;">
+            <div class="mb-2 grid-2 grid-gap-1">
                 <div>
-                    <label for="password"
-                        style="display: block; margin-bottom: 0.5rem; font-size: 0.9rem; color: var(--text-muted);">Password</label>
-                    <input type="password" id="password" name="password" required
-                        style="width: 100%; padding: 0.8rem 1rem; background: var(--glass); border: 1px solid var(--glass-border); border-radius: 12px; color: var(--text-main); font-family: inherit;">
+                    <label for="password" class="text-muted mb-1 d-block fs-md">Password</label>
+                    <input type="password" name="password" id="password" required class="quiz-input"
+                        placeholder="••••••••">
                 </div>
                 <div>
-                    <label for="confirm_password"
-                        style="display: block; margin-bottom: 0.5rem; font-size: 0.9rem; color: var(--text-muted);">Confirm</label>
-                    <input type="password" id="confirm_password" name="confirm_password" required
-                        style="width: 100%; padding: 0.8rem 1rem; background: var(--glass); border: 1px solid var(--glass-border); border-radius: 12px; color: var(--text-main); font-family: inherit;">
+                    <label for="confirm_password" class="text-muted mb-1 d-block fs-md">Confirm</label>
+                    <input type="password" name="confirm_password" id="confirm_password" required class="quiz-input"
+                        placeholder="••••••••">
                 </div>
             </div>
-
-            <button type="submit" class="btn btn-primary" style="width: 100%; padding: 1rem;">Create Account</button>
+            <button type="submit" class="btn btn-primary w-100 p-1">Create Account</button>
         </form>
-
-        <p style="margin-top: 2rem; text-align: center; color: var(--text-muted); font-size: 0.9rem;">
-            Already have an account? <a href="{{ url_for('auth.login') }}"
-                style="color: var(--accent); text-decoration: none; font-weight: 600;">Sign in here</a>
+        <p class="text-muted text-center mt-2 fs-md">
+            Already have an account?
+            <a href="{{ url_for('auth.login') }}" class="text-accent underline-none fw-600">Sign in here</a>
         </p>
     </div>
 </section>
