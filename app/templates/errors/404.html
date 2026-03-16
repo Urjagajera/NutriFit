@@ -3,13 +3,12 @@
 {% block title %}NutriFit | Page Not Found{% endblock %}
 
 {% block content %}
-<section class="container"
-    style="padding-top: 150px; text-align: center; height: 70vh; display: flex; flex-direction: column; justify-content: center; align-items: center;">
-    <h1 style="font-family: 'Playfair Display', serif; font-size: 8rem; color: var(--accent); margin-bottom: 0;">404
-    </h1>
-    <h2 style="font-family: 'Montserrat', sans-serif; margin-bottom: 2rem;">Heavens! We've lost the trail.</h2>
-    <p style="color: var(--text-muted); max-width: 500px; margin-bottom: 3rem;">The page you're looking for might have
-        been moved, deleted, or perhaps it never existed in your fitness journey.</p>
-    <a href="{{ url_for('main.index') }}" class="btn btn-primary">Return to Home</a>
+<section class="container pt-150 text-center h-70vh d-flex flex-col justify-center align-center">
+    <h3 class="section-tag">Error 404</h3>
+    <h1 class="ff-serif fs-huge text-accent mb-0">404</h1>
+    <h2 class="ff-sans mb-2">Heavens! We've lost the trail.</h2>
+    <p class="text-muted max-w-500 mb-3">The page you're looking for might have been moved or doesn't exist. Let's get
+        you back on track.</p>
+    <a href="{{ url_for('main.index') }}" class="btn btn-primary">Return to Safety</a>
 </section>
 {% endblock %}

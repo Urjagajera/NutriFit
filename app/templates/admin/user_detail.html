@@ -3,116 +3,112 @@
 {% block title %}Admin | {{ user.full_name }}{% endblock %}
 
 {% block content %}
-<section class="container" style="padding-top: 120px;">
-    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 3rem;">
+<section class="container pt-120">
+    <div class="d-flex justify-between align-center mb-3">
         <div>
-            <a href="{{ url_for('admin.dashboard') }}"
-                style="color: var(--accent); text-decoration: none; font-size: 0.9rem; margin-bottom: 1rem; display: block;">←
+            <a href="{{ url_for('admin.dashboard') }}" class="text-accent underline-none mb-1 d-block fs-md">←
                 Back to Users</a>
-            <h1 style="font-family: 'Playfair Display', serif; font-size: 3rem;">{{ user.full_name }}</h1>
+            <h1 class="section-title text-left">{{ user.full_name }}</h1>
         </div>
-        <div style="text-align: right;">
-            <span class="section-tag" style="text-align: right;">Focus: {{ user.focus | capitalize or 'N/A' }}</span>
+        <div class="text-right">
+            <span class="section-tag text-right">Focus: {{ user.focus | capitalize or 'N/A' }}</span>
         </div>
     </div>
 
     <!-- Analytics Integration -->
-    <div class="dashboard-grid" style="margin-bottom: 3rem;">
-        <div class="feature-card" style="text-align: left;">
-            <h3 style="margin-bottom: 1.5rem;">Hydration Trend</h3>
-            <canvas id="waterChart" style="max-height: 200px;"></canvas>
+    <div class="dashboard-grid mb-3">
+        <div class="feature-card text-left">
+            <h3 class="mb-1">Hydration Trend</h3>
+            <canvas id="waterChart" class="chart-h-200"></canvas>
         </div>
-        <div class="feature-card" style="text-align: left;">
-            <h3 style="margin-bottom: 1.5rem;">Weight Progress</h3>
-            <canvas id="weightChart" style="max-height: 200px;"></canvas>
+        <div class="feature-card text-left">
+            <h3 class="mb-1">Weight Progress</h3>
+            <canvas id="weightChart" class="chart-h-200"></canvas>
         </div>
     </div>
 
     <div class="dashboard-grid">
         <!-- Biometrics -->
-        <div class="feature-card" style="text-align: left;">
-            <h3 style="margin-bottom: 1.5rem;">Biometric Assessment</h3>
+        <div class="feature-card text-left">
+            <h3 class="mb-1">Biometric Assessment</h3>
             {% if profile %}
-            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem;">
+            <div class="grid-2 grid-gap-1-5">
                 <div>
-                    <p style="font-size: 0.8rem; color: var(--text-muted);">BMI</p>
-                    <p style="font-size: 1.5rem; font-weight: 700; color: var(--accent);">{{ profile.bmi }}</p>
+                    <p class="text-muted fs-sm">BMI</p>
+                    <p class="fs-2xl fw-700 text-accent">{{ profile.bmi }}</p>
                 </div>
                 <div>
-                    <p style="font-size: 0.8rem; color: var(--text-muted);">BMR</p>
-                    <p style="font-size: 1.5rem; font-weight: 700; color: var(--accent);">{{ profile.bmr | int }}</p>
+                    <p class="text-muted fs-sm">BMR</p>
+                    <p class="fs-2xl fw-700 text-accent">{{ profile.bmr | int }}</p>
                 </div>
                 <div>
-                    <p style="font-size: 0.8rem; color: var(--text-muted);">Weight</p>
+                    <p class="text-muted fs-sm">Weight</p>
                     <p>{{ profile.weight }} kg</p>
                 </div>
                 <div>
-                    <p style="font-size: 0.8rem; color: var(--text-muted);">Height</p>
+                    <p class="text-muted fs-sm">Height</p>
                     <p>{{ profile.height }} cm</p>
                 </div>
                 <div>
-                    <p style="font-size: 0.8rem; color: var(--text-muted);">Primary Goal</p>
-                    <p style="text-transform: capitalize;">{{ profile.primary_goal | replace('_', ' ') }}</p>
+                    <p class="text-muted fs-sm">Primary Goal</p>
+                    <p class="text-capitalize">{{ profile.primary_goal | replace('_', ' ') }}</p>
                 </div>
                 <div>
-                    <p style="font-size: 0.8rem; color: var(--text-muted);">Food Habit</p>
-                    <p style="text-transform: capitalize;">{{ profile.food_habit }}</p>
+                    <p class="text-muted fs-sm">Food Habit</p>
+                    <p class="text-capitalize">{{ profile.food_habit }}</p>
                 </div>
-                <div style="grid-column: 1 / -1;">
-                    <p style="font-size: 0.8rem; color: var(--text-muted); margin-bottom: 0.5rem;">Medical History /
+                <div class="mt-1 grid-col-full border-glass-top pt-1">
+                    <p class="text-muted mb-1 fs-sm">Medical History /
                         Allergies</p>
-                    <p style="font-size: 0.9rem;">{{ profile.medical_conditions or 'None' }} / {{ profile.allergies or
+                    <p class="fs-md">{{ profile.medical_conditions or 'None' }} / {{ profile.allergies or
                         'None' }}</p>
                 </div>
             </div>
             {% else %}
-            <p style="color: var(--text-muted);">No profile assessment completed yet.</p>
+            <p class="text-muted">No profile assessment completed yet.</p>
             {% endif %}
         </div>
 
         <!-- Assignments Panel -->
-        <div class="feature-card" style="text-align: left;">
-            <h3 style="margin-bottom: 2rem;">Manage Plans</h3>
+        <div class="feature-card text-left">
+            <h3 class="mb-2">Manage Plans</h3>
 
-            <div style="margin-bottom: 2rem;">
-                <h4 style="font-size: 0.9rem; color: var(--text-muted); margin-bottom: 1rem;">Current Diet Plans</h4>
+            <div class="mb-2">
+                <h4 class="text-muted mb-1 fs-md">Current Diet Plans</h4>
                 {% if diet_plans %}
-                <ul style="list-style: none; padding: 0;">
+                <ul class="list-none p-0">
                     {% for plan in diet_plans %}
-                    <li
-                        style="background: rgba(255,255,255,0.03); padding: 0.8rem; border-radius: 8px; margin-bottom: 0.5rem; display: flex; justify-content: space-between; align-items: center;">
-                        <span style="font-size: 0.85rem;">{{ plan.filename }}</span>
-                        <span style="font-size: 0.75rem; color: var(--text-muted);">{{
+                    <li class="p-1 mb-1 d-flex justify-between align-center glass-card-mini">
+                        <span class="fs-md">{{ plan.filename }}</span>
+                        <span class="text-muted fs-xs">{{
                             plan.upload_date.strftime('%Y-%m-%d') if plan.upload_date else 'N/A' }}</span>
                     </li>
                     {% endfor %}
                 </ul>
                 {% else %}
-                <p style="font-size: 0.85rem; color: var(--text-muted);">No diet plans assigned.</p>
+                <p class="text-muted fs-md">No diet plans assigned.</p>
                 {% endif %}
             </div>
 
             <form action="{{ url_for('admin.assign_diet', user_id=user.id) }}" method="POST"
                 enctype="multipart/form-data">
                 <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
-                <div style="display: flex; gap: 1rem;">
-                    <input type="file" name="diet_file" required
-                        style="flex-grow: 1; padding: 0.6rem; background: var(--glass); border: 1px solid var(--glass-border); border-radius: 12px; font-size: 0.8rem;">
-                    <button type="submit" class="btn btn-primary" style="padding: 0.6rem 1.5rem;">Upload</button>
+                <div class="d-flex gap-1">
+                    <input type="file" name="diet_file" required class="quiz-input p-1 fs-sm flex-grow">
+                    <button type="submit" class="btn btn-primary px-1-5">Upload</button>
                 </div>
             </form>
 
-            <hr style="border: 0; border-top: 1px solid var(--glass-border); margin: 2rem 0;">
+            <hr class="mb-2 border-glass-top">
 
             <form action="{{ url_for('admin.assign_workout', user_id=user.id) }}" method="POST">
                 <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
-                <label
-                    style="display: block; margin-bottom: 0.8rem; font-size: 0.9rem; color: var(--text-muted);">Workout
+                <label class="text-muted mb-1 d-block fs-md">Workout
                     Link</label>
-                <div style="display: flex; gap: 1rem;">
+                <div class="d-flex gap-1">
                     <input type="url" name="workout_link" required placeholder="https://youtube.com/..."
-                        style="flex-grow: 1; padding: 0.8rem; background: var(--glass); border: 1px solid var(--glass-border); border-radius: 12px; color: var(--text-main); font-family: inherit;">
-                    <button type="submit" class="btn btn-primary" style="padding: 0.8rem 1.5rem;">Assign</button>
+                        class="quiz-input flex-grow">
+                    <button type="submit" class="btn btn-primary px-1-5 py-1">Assign</button>
                 </div>
             </form>
         </div>

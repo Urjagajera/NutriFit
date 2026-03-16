@@ -3,70 +3,58 @@
 {% block title %}NutriFit | Personal Health Quiz{% endblock %}
 
 {% block content %}
-<section class="container" style="padding-top: 15vh; min-height: 100vh;">
-    <div class="feature-card" style="max-width: 800px; margin: 0 auto; text-align: left;">
+<section class="container pt-15vh min-h-100vh">
+    <div class="feature-card m-auto text-left max-w-800">
         <span class="section-tag">Assessment</span>
-        <h2 style="font-family: 'Playfair Display', serif; font-size: 2.5rem; margin-bottom: 1rem;">Health & Biometric
+        <h2 class="section-title text-left mb-1 fs-xl">Health & Biometric
             Quiz</h2>
-        <p style="color: var(--text-muted); margin-bottom: 3rem;">Please provide accurate information for the best
+        <p class="text-muted mb-3">Please provide accurate information for the best
             personalized results.</p>
 
         <form action="{{ url_for('main.quiz') }}" method="POST">
             <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
             <!-- Basic Metrics -->
-            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin-bottom: 2rem;">
+            <div class="mb-2 grid-2">
                 <div>
-                    <label
-                        style="display: block; margin-bottom: 0.5rem; font-size: 0.9rem; color: var(--text-muted);">Age</label>
-                    <input type="number" name="age" required
-                        style="width: 100%; padding: 0.8rem 1rem; background: var(--glass); border: 1px solid var(--glass-border); border-radius: 12px; color: var(--text-main); font-family: inherit;">
+                    <label class="text-muted mb-1 d-block fs-md">Age</label>
+                    <input type="number" name="age" required class="quiz-input">
                 </div>
                 <div>
-                    <label
-                        style="display: block; margin-bottom: 0.5rem; font-size: 0.9rem; color: var(--text-muted);">Gender</label>
-                    <select name="gender" required
-                        style="width: 100%; padding: 0.8rem 1rem; background: var(--glass); border: 1px solid var(--glass-border); border-radius: 12px; color: var(--text-main); font-family: inherit;">
+                    <label class="text-muted mb-1 d-block fs-md">Gender</label>
+                    <select name="gender" required class="quiz-input">
                         <option value="male">Male</option>
                         <option value="female">Female</option>
                     </select>
                 </div>
                 <div>
-                    <label
-                        style="display: block; margin-bottom: 0.5rem; font-size: 0.9rem; color: var(--text-muted);">Height
+                    <label class="text-muted mb-1 d-block fs-md">Height
                         (cm)</label>
-                    <input type="number" step="0.1" name="height" required
-                        style="width: 100%; padding: 0.8rem 1rem; background: var(--glass); border: 1px solid var(--glass-border); border-radius: 12px; color: var(--text-main); font-family: inherit;">
+                    <input type="number" step="0.1" name="height" required class="quiz-input">
                 </div>
                 <div>
-                    <label
-                        style="display: block; margin-bottom: 0.5rem; font-size: 0.9rem; color: var(--text-muted);">Weight
+                    <label class="text-muted mb-1 d-block fs-md">Weight
                         (kg)</label>
-                    <input type="number" step="0.1" name="weight" required
-                        style="width: 100%; padding: 0.8rem 1rem; background: var(--glass); border: 1px solid var(--glass-border); border-radius: 12px; color: var(--text-main); font-family: inherit;">
+                    <input type="number" step="0.1" name="weight" required class="quiz-input">
                 </div>
             </div>
 
-            <hr style="border: 0; border-top: 1px solid var(--glass-border); margin: 3rem 0;">
+            <hr class="mb-3 border-glass-top">
 
             <!-- Goals & Habits -->
-            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin-bottom: 2rem;">
+            <div class="mb-2 grid-2">
                 <div>
-                    <label
-                        style="display: block; margin-bottom: 0.5rem; font-size: 0.9rem; color: var(--text-muted);">Primary
+                    <label class="text-muted mb-1 d-block fs-md">Primary
                         Goal</label>
-                    <select name="primary_goal" required
-                        style="width: 100%; padding: 0.8rem 1rem; background: var(--glass); border: 1px solid var(--glass-border); border-radius: 12px; color: var(--text-main); font-family: inherit;">
+                    <select name="primary_goal" required class="quiz-input">
                         <option value="weight_loss">Weight Loss</option>
                         <option value="muscle_gain">Muscle Gain</option>
                         <option value="maintenance">Maintenance</option>
                     </select>
                 </div>
                 <div>
-                    <label
-                        style="display: block; margin-bottom: 0.5rem; font-size: 0.9rem; color: var(--text-muted);">Food
+                    <label class="text-muted mb-1 d-block fs-md">Food
                         Habits</label>
-                    <select name="food_habit" required
-                        style="width: 100%; padding: 0.8rem 1rem; background: var(--glass); border: 1px solid var(--glass-border); border-radius: 12px; color: var(--text-main); font-family: inherit;">
+                    <select name="food_habit" required class="quiz-input">
                         <option value="vegetarian">Vegetarian</option>
                         <option value="non_vegetarian">Non-Vegetarian</option>
                         <option value="vegan">Vegan</option>
@@ -74,28 +62,22 @@
                 </div>
             </div>
 
-            <div style="margin-bottom: 2rem;">
-                <label
-                    style="display: block; margin-bottom: 0.5rem; font-size: 0.9rem; color: var(--text-muted);">Allergies
+            <div class="mb-2">
+                <label class="text-muted mb-1 d-block fs-md">Allergies
                     (if any)</label>
-                <textarea name="allergies"
-                    style="width: 100%; padding: 0.8rem 1rem; background: var(--glass); border: 1px solid var(--glass-border); border-radius: 12px; color: var(--text-main); font-family: inherit; min-height: 80px;"></textarea>
+                <textarea name="allergies" class="quiz-input h-80"></textarea>
             </div>
 
-            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin-bottom: 2rem;">
+            <div class="mb-2 grid-2">
                 <div>
-                    <label
-                        style="display: block; margin-bottom: 0.5rem; font-size: 0.9rem; color: var(--text-muted);">Avg.
+                    <label class="text-muted mb-1 d-block fs-md">Avg.
                         Sleep Hours</label>
-                    <input type="number" step="0.5" name="sleep_hours" required
-                        style="width: 100%; padding: 0.8rem 1rem; background: var(--glass); border: 1px solid var(--glass-border); border-radius: 12px; color: var(--text-main); font-family: inherit;">
+                    <input type="number" step="0.5" name="sleep_hours" required class="quiz-input">
                 </div>
                 <div>
-                    <label
-                        style="display: block; margin-bottom: 0.5rem; font-size: 0.9rem; color: var(--text-muted);">Commitment
+                    <label class="text-muted mb-1 d-block fs-md">Commitment
                         Level</label>
-                    <select name="commitment_level" required
-                        style="width: 100%; padding: 0.8rem 1rem; background: var(--glass); border: 1px solid var(--glass-border); border-radius: 12px; color: var(--text-main); font-family: inherit;">
+                    <select name="commitment_level" required class="quiz-input">
                         <option value="low">Low (1-2 days/week)</option>
                         <option value="moderate">Moderate (3-4 days/week)</option>
                         <option value="high">High (5+ days/week)</option>
@@ -103,16 +85,14 @@
                 </div>
             </div>
 
-            <div style="margin-bottom: 3rem;">
-                <label
-                    style="display: block; margin-bottom: 0.5rem; font-size: 0.9rem; color: var(--text-muted);">Medical
+            <div class="mb-3">
+                <label class="text-muted mb-1 d-block fs-md">Medical
                     Conditions (if any)</label>
-                <textarea name="medical_conditions"
-                    style="width: 100%; padding: 0.8rem 1rem; background: var(--glass); border: 1px solid var(--glass-border); border-radius: 12px; color: var(--text-main); font-family: inherit; min-height: 80px;"></textarea>
+                <textarea name="medical_conditions" class="quiz-input h-80"></textarea>
             </div>
 
-            <button type="submit" class="btn btn-primary"
-                style="width: 100%; padding: 1.2rem; font-size: 1.1rem;">Generate My Personalized Plan</button>
+            <button type="submit" class="btn btn-primary w-100 fs-lg p-lg">Generate My
+                Personalized Plan</button>
         </form>
     </div>
 </section>
