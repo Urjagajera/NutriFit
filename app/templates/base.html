@@ -17,7 +17,7 @@
     {% block extra_css %}{% endblock %}
 </head>
 
-<body>
+<body {% if session.get('theme') == 'dark' %}data-theme="dark"{% endif %}>
     <header class="navbar" role="banner">
         <nav class="container" role="navigation" aria-label="Main Navigation">
             <div class="logo">
@@ -72,24 +72,37 @@
         const themeIcon = document.getElementById('theme-icon');
         const body = document.body;
 
-        const currentTheme = localStorage.getItem('theme') || 'light';
-        if (currentTheme === 'dark') {
-            body.setAttribute('data-theme', 'dark');
-            themeIcon.textContent = '☀️';
-        }
-
         themeToggle.addEventListener('click', () => {
             const isDark = body.getAttribute('data-theme') === 'dark';
-            if (isDark) {
-                body.removeAttribute('data-theme');
-                themeIcon.textContent = '🌙';
-                localStorage.setItem('theme', 'light');
-            } else {
-                body.setAttribute('data-theme', 'dark');
-                themeIcon.textContent = '☀️';
-                localStorage.setItem('theme', 'dark');
-            }
+            
+            // Sync with backend session
+            fetch("{{ url_for('main.toggle_theme') }}", {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRFToken': "{{ csrf_token() if csrf_token else '' }}"
+                }
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.theme === 'dark') {
+                    body.setAttribute('data-theme', 'dark');
+                    themeIcon.textContent = '☀️';
+                    localStorage.setItem('theme', 'dark');
+                } else {
+                    body.removeAttribute('data-theme');
+                    themeIcon.textContent = '🌙';
+                    localStorage.setItem('theme', 'light');
+                }
+            });
         });
+
+        // Initialize icon on load based on current data-theme
+        if (body.getAttribute('data-theme') === 'dark') {
+            themeIcon.textContent = '☀️';
+        } else {
+            themeIcon.textContent = '🌙';
+        }
     </script>
     {% block scripts %}{% endblock %}
 </body>

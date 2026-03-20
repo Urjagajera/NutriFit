@@ -1,4 +1,5 @@
-from flask import Blueprint, render_template, redirect, url_for, flash, request, session
+import os
+from flask import Blueprint, render_template, redirect, url_for, flash, request, session, send_from_directory, current_app
 from app.models import User, Profile, WaterLog, WeightLog, DietPlan, WorkoutLink
 from app.extensions import db
 from functools import wraps
@@ -214,5 +215,26 @@ def update_water():
     db.session.commit()
     flash(f'Added {amount}ml of water!', 'success')
     return redirect(url_for('main.dashboard'))
+
+
+@main_bp.route('/download-diet/<filename>')
+@login_required
+def download_diet(filename):
+    user_id = session['user_id']
+    # Securely point to the user's specific diet plan folder
+    directory = os.path.join(current_app.config['UPLOAD_FOLDER'], str(user_id), 'diet_plans')
+    
+    return send_from_directory(
+        directory=directory,
+        path=filename,
+        as_attachment=True
+    )
+
+@main_bp.route('/toggle-theme', methods=['POST'])
+def toggle_theme():
+    current_theme = session.get('theme', 'light')
+    new_theme = 'dark' if current_theme == 'light' else 'light'
+    session['theme'] = new_theme
+    return {'theme': new_theme}
 
 

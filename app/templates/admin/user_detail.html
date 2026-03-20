@@ -79,9 +79,11 @@
                 <ul class="list-none p-0">
                     {% for plan in diet_plans %}
                     <li class="p-1 mb-1 d-flex justify-between align-center glass-card-mini">
-                        <span class="fs-md">{{ plan.filename }}</span>
-                        <span class="text-muted fs-xs">{{
-                            plan.upload_date.strftime('%Y-%m-%d') if plan.upload_date else 'N/A' }}</span>
+                        <div class="d-flex flex-col">
+                            <span class="fs-md">{{ plan.filename }}</span>
+                            <span class="text-muted fs-xs">{{ plan.upload_date.strftime('%Y-%m-%d') if plan.upload_date else 'N/A' }}</span>
+                        </div>
+                        <a href="{{ url_for('main.download_diet', filename=plan.filename) }}" class="text-accent fs-xs underline-none">Download →</a>
                     </li>
                     {% endfor %}
                 </ul>
