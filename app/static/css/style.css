@@ -893,49 +893,128 @@ textarea:focus {
 }
 
 
-
 /* ====================================================
-    MEDIA QUERIES (Responsive)
+    MEDIA QUERIES (Robust Responsiveness)
    ==================================================== */
-@keyframes fadeIn {
-    from {
-        opacity: 0;
-        transform: translateY(10px);
+
+/* Tablet (<1024px) */
+@media (max-width: 1024px) {
+    nav {
+        padding: 0.8rem 1.5rem;
     }
 
-    to {
-        opacity: 1;
-        transform: translateY(0);
+    .container {
+        padding: 1.5rem;
+    }
+
+    .dashboard-grid, .feature-grid {
+        gap: 1.5rem;
     }
 }
 
+/* Mobile (<768px) */
 @media (max-width: 768px) {
+    body {
+        margin-top: 140px; /* Account for multi-line navbar */
+    }
+
+    header {
+        height: auto;
+        padding-bottom: 0.5rem;
+    }
+
     nav {
         flex-direction: column;
-        gap: 1.5rem;
-        padding: 1rem;
+        gap: 1rem;
+        text-align: center;
     }
 
     .nav-links {
-        gap: 1.2rem;
+        gap: 1rem;
         flex-wrap: wrap;
         justify-content: center;
+    }
+
+    .nav-links a.btn {
+        padding: 0.6rem 1.2rem;
+        font-size: 0.85rem;
+    }
+
+    .dashboard-grid, .feature-grid {
+        grid-template-columns: 1fr !important;
+        gap: 1.5rem;
+    }
+
+    .section-title {
+        font-size: 1.8rem;
+    }
+
+    .fs-xl {
+        font-size: 1.8rem;
+    }
+
+    /* Cards Stacking */
+    .stat-card, .feature-card, .plan-card {
+        padding: 1.5rem;
+        width: 100%;
+    }
+
+    /* Tables Responsiveness */
+    .table-container {
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+        margin-bottom: 1rem;
+        border-radius: 12px;
+    }
+
+    table {
+        min-width: 600px; /* Force scroll on small screens */
+    }
+
+    .table-cell {
+        padding: 1rem 0.5rem;
+        font-size: 0.85rem;
+    }
+
+    /* Forms */
+    input, select, textarea, .btn {
+        width: 100%;
+        font-size: 1rem; /* Better touch target */
     }
 
     .hero-btns {
         flex-direction: column;
         width: 100%;
-        max-width: 300px;
     }
 
-    .feature-grid,
-    .dashboard-grid {
-        grid-template-columns: 1fr;
+    .hero-btns .btn {
+        width: 100%;
     }
 
-    .footer-links {
-        flex-direction: column;
-        gap: 1rem;
+    /* Spacing */
+    .pt-80, .pt-100 {
+        padding-top: 20px;
+    }
+    
+    .coach-badge {
+        margin-left: 0;
+        max-width: 100%;
+        position: relative;
+        bottom: 0;
+        left: 0;
+        transform: none;
+    }
+}
+
+/* Animation */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
     }
 }
 

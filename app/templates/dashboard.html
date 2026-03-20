@@ -78,8 +78,8 @@
                 <h4 class="mb-1 text-accent">Diet Plan</h4>
                 {% if diet %}
                 <p class="mb-1">{{ diet.filename }}</p>
-                <a href="{{ url_for('static', filename='uploads/' + user.id|string + '/diet_plans/' + diet.filename) }}"
-                    target="_blank" class="nav-link fw-600 text-accent">Download Report
+                <a href="{{ url_for('main.download_diet', filename=diet.filename) }}"
+                    class="nav-link fw-600 text-accent">Download Report
                     →</a>
 
                 {% else %}
@@ -104,8 +104,8 @@
                     {% for p_diet in previous_diets %}
                     <li class="p-1 mb-1 d-flex justify-between align-center glass-card-mini">
                         <span class="fs-md">{{ p_diet.filename }}</span>
-                        <a href="{{ url_for('static', filename='uploads/' + user.id|string + '/diet_plans/' + p_diet.filename) }}"
-                            target="_blank" class="fs-xs text-accent underline-none">Download →</a>
+                        <a href="{{ url_for('main.download_diet', filename=p_diet.filename) }}"
+                            class="fs-xs text-accent underline-none">Download →</a>
                     </li>
                     {% endfor %}
                 </ul>
