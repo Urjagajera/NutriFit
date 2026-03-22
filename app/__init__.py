@@ -51,4 +51,5 @@ def create_app(config_class=active_config):
 
     return app
 
-
+from dotenv import load_dotenv
+load_dotenv()
