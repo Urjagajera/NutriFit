@@ -482,15 +482,6 @@ footer {
 }
 
 /*--------------- CARDS -------------------*/
-.coach-badge {
-    max-width: 35%;
-    margin-left: 25rem;
-
-    background: var(--primary);
-    color: var(--white);
-    text-align: center;
-}
-
 .feature-card {
     background: var(--card-bg);
     backdrop-filter: blur(12px);
@@ -819,8 +810,7 @@ textarea:focus {
    ==================================================== */
 .hero {
     min-height: 100vh;
-    background: linear-gradient(rgba(2, 6, 23, 0.7), rgba(2, 6, 23, 0.7)),
-        url('https://images.unsplash.com/photo-1490645935967-10de6ba17061?q=80&w=2053&auto=format&fit=crop');
+    background: url("../images/landing-page.jpg") no-repeat center center;
     background-size: cover;
     background-position: center;
     display: flex;
@@ -828,6 +818,21 @@ textarea:focus {
     align-items: center;
     padding: 2rem;
     margin-bottom: 2rem;
+    position: relative;
+    isolation: isolate;
+}
+
+.hero::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 1;
+}
+
+.hero * {
+    position: relative;
+    z-index: 2;
 }
 
 .hero h1 {
@@ -873,23 +878,53 @@ textarea:focus {
 
 .hero-coach-img {
     width: 100%;
-    max-width: 400px;
-    border-radius: 30px;
+    height: auto;
+    max-width: 300px;
     box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
     border: 8px solid var(--glass-bg);
 }
 
+.coach-img {
+    width: 100%;
+    max-width: 300px;
+    height: auto;
+    object-fit: cover;
+}
+
 .coach-badge {
-    background: var(--primary);
-    color: white;
-    padding: 1rem 2rem;
-    border-radius: 15px;
-    position: absolute;
-    bottom: -20px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 80%;
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 6px;
+    background-color: #283344;
+    padding: 12px 16px;
+    border-radius: 12px;
+    margin-top: 10px;
+    width: fit-content;
+    max-width: 300px;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+
+.coach-badge h3{
+    margin: 0;
+    color: #dbe3de;
+}
+
+
+.coach-badge h4{
+    margin: 0;
+    color: #dbe3de;
+}
+.coach-badge p {
+    margin: 0;
+    font-size: 14px;
+    color: #cbd5f5;
+}
+
+.mission-text {
+    font-size: 13px;
+    color: #94a3b8;
 }
 
 
@@ -997,12 +1032,7 @@ textarea:focus {
     }
     
     .coach-badge {
-        margin-left: 0;
         max-width: 100%;
-        position: relative;
-        bottom: 0;
-        left: 0;
-        transform: none;
     }
 }
 

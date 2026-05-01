@@ -230,11 +230,3 @@ def download_diet(filename):
         as_attachment=True
     )
 
-@main_bp.route('/toggle-theme', methods=['POST'])
-def toggle_theme():
-    current_theme = session.get('theme', 'light')
-    new_theme = 'dark' if current_theme == 'light' else 'light'
-    session['theme'] = new_theme
-    return {'theme': new_theme}
-
-

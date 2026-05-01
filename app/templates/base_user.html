@@ -24,11 +24,6 @@
                 <li><a href="{{ url_for('main.user_home') }}" class="nav-link">Home</a></li>
                 <li><a href="{{ url_for('main.dashboard') }}" class="nav-link">Dashboard</a></li>
                 <li><a href="{{ url_for('main.reports') }}" class="nav-link">Reports</a></li>
-                <li>
-                    <button id="theme-toggle" class="theme-toggle" aria-label="Toggle Theme">
-                        <span id="theme-icon">🌙</span>
-                    </button>
-                </li>
                 <li><a href="{{ url_for('auth.logout') }}" class="btn btn-outline btn-logout">Logout</a></li>
             </ul>
         </nav>
@@ -50,34 +45,10 @@
 
     <footer class="footer">
         <div class="container text-center">
-            <p style="font-size: 0.75rem; color: var(--text-muted);">&copy; 2026 NutriFit Web Application.</p>
+            <p class="fs-xs text-muted">&copy; 2026 NutriFit Web Application.</p>
         </div>
     </footer>
 
-    <script>
-        const themeToggle = document.getElementById('theme-toggle');
-        const themeIcon = document.getElementById('theme-icon');
-        const body = document.body;
-
-        const currentTheme = localStorage.getItem('theme') || 'light';
-        if (currentTheme === 'dark') {
-            body.setAttribute('data-theme', 'dark');
-            themeIcon.textContent = '☀️';
-        }
-
-        themeToggle.addEventListener('click', () => {
-            const isDark = body.getAttribute('data-theme') === 'dark';
-            if (isDark) {
-                body.removeAttribute('data-theme');
-                themeIcon.textContent = '🌙';
-                localStorage.setItem('theme', 'light');
-            } else {
-                body.setAttribute('data-theme', 'dark');
-                themeIcon.textContent = '☀️';
-                localStorage.setItem('theme', 'dark');
-            }
-        });
-    </script>
     {% block scripts %}{% endblock %}
 </body>
 
