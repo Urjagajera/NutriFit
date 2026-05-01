@@ -22,11 +22,6 @@
             </div>
             <ul class="nav-links">
                 <li><a href="{{ url_for('admin.dashboard') }}" class="nav-link">Dashboard</a></li>
-                <li>
-                    <button id="theme-toggle" class="theme-toggle" aria-label="Toggle Theme">
-                        <span id="theme-icon">🌙</span>
-                    </button>
-                </li>
                 <li><a href="{{ url_for('auth.logout') }}" class="btn btn-outline btn-logout">Logout</a></li>
             </ul>
         </nav>
@@ -52,30 +47,6 @@
         </div>
     </footer>
 
-    <script>
-        const themeToggle = document.getElementById('theme-toggle');
-        const themeIcon = document.getElementById('theme-icon');
-        const body = document.body;
-
-        const currentTheme = localStorage.getItem('theme') || 'light';
-        if (currentTheme === 'dark') {
-            body.setAttribute('data-theme', 'dark');
-            themeIcon.textContent = '☀️';
-        }
-
-        themeToggle.addEventListener('click', () => {
-            const isDark = body.getAttribute('data-theme') === 'dark';
-            if (isDark) {
-                body.removeAttribute('data-theme');
-                themeIcon.textContent = '🌙';
-                localStorage.setItem('theme', 'light');
-            } else {
-                body.setAttribute('data-theme', 'dark');
-                themeIcon.textContent = '☀️';
-                localStorage.setItem('theme', 'dark');
-            }
-        });
-    </script>
     {% block scripts %}{% endblock %}
 </body>
 
