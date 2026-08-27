@@ -1,67 +1,84 @@
-# NutriFit - Personal Health & Nutrition Management
+# NutriFit
 
-NutriFit is a premium, data-driven web application designed to help users track their fitness journey, hydration, and nutritional progress through personalized plans and interactive visualizations.
+## 1. PROJECT OVERVIEW
+NutriFit is a personalized health and fitness web application. It allows users to register, log in, complete a health profile, and track their daily water intake and weight progression over time. The application also provides an administrative interface for staff to review user profiles and securely upload personalized diet plans and workout links.
 
-## 🚀 Key Features
+## 2. TECH STACK
+- **Core Framework**: Flask (3.0.0)
+- **Database ORM**: Flask-SQLAlchemy (3.1.1)
+- **Database Driver**: PyMySQL (1.1.0)
+- **Forms & CSRF**: Flask-WTF (1.2.2)
+- **Environment Management**: python-dotenv (1.0.0)
+- **WSGI Server**: Werkzeug (3.0.1) & Gunicorn (21.2.0)
+- **Cryptography**: cryptography (50.0.1)
 
-- **Personalized Biometric Assessment**: Interactive quiz to calculate BMI and BMR.
-- **Dynamic User Dashboard**: Real-time hydration tracking with daily reset logic.
-- **Interactive Analytics**: Progress charts for weight and water consumption powered by Chart.js.
-- **Admin Control Center**: Secure user management, diet plan assignment (PDF/Images), and workout guide integration.
-- **Role-Based Access Control**: Secure authentication system with protected administrative routes.
-- **Premium UI/UX**: Modern glassmorphism design with smooth transitions and responsive layouts.
+## 3. SETUP INSTRUCTIONS
+Follow these steps to run the application locally.
 
-## 🛠 Technology Stack
+**1. Clone the repository and navigate into the directory:**
+```bash
+git clone https://github.com/Urjagajera/NutriFit
+cd NutriFit
+```
 
-- **Backend**: Python / Flask
-- **Frontend**: Pure HTML5 / CSS3 (Vanilla JS for interactive components)
-- **Database**: MySQL (Flask-SQLAlchemy ORM)
-- **Authentication**: Flask Sessions / Werkzeug Password Hashing
-- **Visuals**: Chart.js
+**2. Set up the virtual environment:**
+```bash
+python -m venv venv
+# On Windows
+venv\Scripts\activate
+# On macOS/Linux
+source venv/bin/activate
+```
 
-## 📦 Installation
+**3. Install dependencies:**
+```bash
+pip install -r requirements.txt
+```
 
-1. **Clone the repository**:
-   ```bash
-   git clone <repository-url>
-   cd NutriFit
-   ```
+**4. Database Configuration:**
+Ensure you have a local MySQL server running.
+Create a database named `nutrifit_db`.
+Create a `.env` file in the root directory (or use the existing one) with the following content (update the password and credentials as needed):
+```env
+SECRET_KEY=your_secret_key_here
+DATABASE_URL=mysql+pymysql://root:password@localhost:3306/nutrifit_db
+FLASK_ENV=development
+```
 
-2. **Set up virtual environment**:
-   ```bash
-   python -m venv venv
-   source venv/bin/activate  # Windows: venv\Scripts\activate
-   ```
+**5. Initialize the Database:**
+Run the database creation script to generate all necessary tables based on the SQLAlchemy models:
+```bash
+python create_db.py
+```
 
-3. **Install dependencies**:
-   ```bash
-   pip install -r requirements.txt
-   ```
+**6. Start the Development Server:**
+Start the application using the runner script:
+```bash
+python run.py
+```
+Access the application at `http://127.0.0.1:5000/`.
 
-4. **Configure Environment**:
-   Create a `.env` file in the root directory:
-   ```env
-   SECRET_KEY=your_secret_key
-   DATABASE_URL=mysql+pymysql://user:password@localhost/nutrifit_db
-   ```
+## 4. FEATURES
+- **User Authentication**: Secure user registration, login, and logout.
+- **Profile Generation**: Collection of user age, gender, height, and goals.
+- **Metrics Calculation**: Automatic generation of Body Mass Index (BMI) and Basal Metabolic Rate (BMR) based on the Mifflin-St Jeor equation.
+- **Water Tracking**: Daily water logging functionality.
+- **Weight Logging**: Historical weight progress tracking.
+- **Admin Dashboard**: Administrator views for managing users, assigning `.pdf`, `.docx`, or `.xlsx` diet plans, and assigning workout links.
 
-5. **Initialize Database**:
-   ```bash
-   python create_db.py
-   ```
-
-6. **Run the application**:
-   ```bash
-   python run.py
-   ```
-
-## 🛡 Security
-
-- Password hashing via PBKDF2.
-- Session-based authentication.
-- CSRF protection concepts (Flask-built-in).
-- Secure file upload handling using `secure_filename`.
-- `@admin_required` custom decorators for RBAC.
-
----
-© 2026 NutriFit Application Team. Built for Excellence.
+## 5. PROJECT STRUCTURE
+```
+NutriFit/
+├── app/
+│   ├── models.py       # SQLAlchemy database models (User, Profile, WaterLog, DietPlan, etc.)
+│   ├── routes/         # Application routing blueprints
+│   │   ├── admin.py    # Admin-specific routes and file upload logic
+│   │   ├── auth.py     # Login and registration routes
+│   │   └── main.py     # Core user dashboard and logging routes
+│   ├── templates/      # HTML templates (Jinja2) for the frontend views
+│   └── static/         # CSS, images, and user file uploads
+├── config.py           # Application configuration and environment loading
+├── create_db.py        # Database initialization script
+├── requirements.txt    # Python dependencies
+└── run.py              # Application entry point
+```
