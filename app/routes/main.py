@@ -96,9 +96,7 @@ def quiz():
             flash('An unexpected error occurred. Please try again.', 'danger')
             
     return render_template('quiz.html', user=user, profile=user.profile)
-        
-from datetime import date
-
+    
 @main_bp.route('/dashboard')
 @login_required
 def dashboard():
@@ -142,7 +140,6 @@ def dashboard():
 
 
 from datetime import date, timedelta
-import json
 
 @main_bp.route('/reports')
 @login_required

@@ -46,5 +46,5 @@ The backend processes raw database metrics and transmits them to the frontend vi
 ### Responsive Architecture
 The frontend utilizes a mobile-first approach with CSS Media Queries. Flexbox and Grid layouts ensure components (cards, tables, navbars) adapt dynamically to various screen dimensions.
 
-### Theme Implementation
-Theming is achieved via CSS Variables defined in `:root`. A JavaScript listener toggles the `data-theme` attribute on the `body` tag, with state persistence managed through `localStorage`.
+### Design System & Theming
+Styling is achieved via custom CSS Variables defined in `:root`, providing consistent colors, typography, and layout spacing across the application.

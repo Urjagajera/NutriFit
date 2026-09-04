@@ -43,5 +43,5 @@ A modular Flask application utilizing the Application Factory pattern and Bluepr
 ## Responsive Design Requirement
 The application must be fully responsive, providing an optimal viewing experience across Desktop, Tablet, and Mobile devices using CSS Media Queries and Flexbox/Grid.
 
-## Theme Support (Light Mode)
-The system shall support a persistent Light Mode (default) and Dark Mode, togglable via the UI and saved in the user's browser local storage.
+## Design System
+The system shall utilize a clean, consistent modern aesthetic styled through CSS custom properties.
