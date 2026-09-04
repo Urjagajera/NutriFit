@@ -1,5 +1,5 @@
 import os
-from flask import Flask, render_template, current_app, session, redirect, url_for
+from flask import Flask, render_template, redirect, url_for
 from config import active_config
 from app.extensions import db
 from app.models import User # Ensure models are loaded
@@ -37,19 +37,4 @@ def create_app(config_class=active_config):
         app.logger.error(f"Internal Server Error: {str(e)}")
         # In production, we don't expose any details
         return render_template('errors/500.html'), 500
-
-    @app.before_request
-    def force_admin_safe():
-        # This hook runs before every request.
-        # We ensure that if anything fails here, we handle it gracefully.
-        try:
-            # Placeholder for any global pre-flight checks (e.g. DB heartbeat)
-            pass
-        except Exception:
-            app.logger.error("Global before_request failure")
-            return redirect(url_for('main.index'))
-
     return app
-
-from dotenv import load_dotenv
-load_dotenv()

@@ -1,6 +1,6 @@
 import os
 from flask import Blueprint, render_template, redirect, url_for, flash, session, request, current_app
-from app.models import User, Profile, DietPlan, WorkoutLink, WaterLog
+from app.models import User, Profile, DietPlan, WorkoutLink, WaterLog, WeightLog
 from app.extensions import db
 from functools import wraps
 from werkzeug.utils import secure_filename
@@ -11,20 +11,15 @@ admin_bp = Blueprint('admin', __name__, url_prefix='/admin')
 def admin_required(f):
     @wraps(f)
     def decorated_function(*args, **kwargs):
-        print("DEBUG: ADMIN DECORATOR EXECUTED")
         try:
             if 'user_id' not in session:
-                print("DEBUG: ADMIN DECORATOR - No user_id in session")
                 flash('Please login to access this page.', 'warning')
                 return redirect(url_for('auth.login'))
             if session.get('user_role') != 'admin':
-                print(f"DEBUG: ADMIN DECORATOR - User {session.get('user_id')} is not admin (Role: {session.get('user_role')}")
                 flash('Admin access required.', 'danger')
                 return redirect(url_for('main.index'))
-            print("DEBUG: ADMIN DECORATOR - Validation successful")
             return f(*args, **kwargs)
         except Exception as e:
-            print(f"DEBUG: ADMIN DECORATOR CRASHED: {str(e)}")
             raise e
     return decorated_function
 
@@ -34,15 +29,9 @@ def dashboard():
     users = User.query.filter_by(role='user').order_by(User.created_at.desc()).all()
     return render_template('admin/dashboard.html', users=users)
 
-from app.models import User, Profile, DietPlan, WorkoutLink, WaterLog, WeightLog
-import logging
-
-# Configure logging for this module
-logger = logging.getLogger(__name__)
 @admin_bp.route('/user/<int:user_id>')
 @admin_required
 def user_detail(user_id):
-    print(f"DEBUG: ADMIN USER DETAIL ROUTE EXECUTED for user_id: {user_id}")
     """
     Production-grade user detail route with zero-crash guarantee.
     All data is pre-processed and validated before being passed to the template.
@@ -50,14 +39,12 @@ def user_detail(user_id):
     try:
         # 1. Validate Admin Session (redundant but safe)
         if session.get('user_role') != 'admin':
-            print("DEBUG: ADMIN ROUTE - Unauthorized access attempt")
             flash("Unauthorized access attempt.", "danger")
             return redirect(url_for('main.index'))
 
         # 2. Safe User Fetch
         user = User.query.get(user_id)
         if not user:
-            print(f"DEBUG: ADMIN ROUTE - User {user_id} not found")
             flash(f"User with ID {user_id} not found.", "warning")
             return redirect(url_for('admin.dashboard'))
         
@@ -77,7 +64,6 @@ def user_detail(user_id):
                 water_labels.append(day.strftime('%b %d'))
                 water_values.append(float(log.consumed) if log and log.consumed is not None else 0.0)
         except Exception as water_err:
-            print(f"DEBUG: ADMIN ROUTE - Water error: {water_err}")
             current_app.logger.warning(f"Water history fetch failed for user {user_id}: {water_err}")
             water_labels, water_values = [], []
 
@@ -93,7 +79,7 @@ def user_detail(user_id):
                 weight_labels = ['Initial']
                 weight_values = [float(profile.weight)]
         except Exception as weight_err:
-            print(f"DEBUG: ADMIN ROUTE - Weight error: {weight_err}")
+            current_app.logger.warning(f"Weight history fetch failed for user {user_id}: {weight_err}")
 
         # 6. Explicitly Fetch Logs and Plans (No lazy-loading in template)
         water_logs = []
@@ -105,10 +91,9 @@ def user_detail(user_id):
             weight_logs = WeightLog.query.filter_by(user_id=user_id).order_by(WeightLog.date.desc()).all()
             diet_plans = user.diet_plans.order_by(DietPlan.upload_date.desc()).all()
         except Exception as rel_err:
-            print(f"DEBUG: ADMIN ROUTE - Rel error: {rel_err}")
+            current_app.logger.warning(f"Rel error for user {user_id}: {rel_err}")
 
         # 7. Zero-Risk Render
-        print("DEBUG: ADMIN ROUTE - Rendering template")
         return render_template('admin/user_detail.html', 
                                user=user, 
                                profile=profile,
@@ -121,7 +106,6 @@ def user_detail(user_id):
                                weight_values=weight_values)
 
     except Exception as fatal_err:
-        print(f"DEBUG: ADMIN ROUTE - FATAL ERROR: {fatal_err}")
         current_app.logger.exception(f"CRITICAL: System failure in user_detail for ID {user_id}")
         flash("We encountered a stability issue loading this profile.", "warning")
         return redirect(url_for('admin.dashboard'))

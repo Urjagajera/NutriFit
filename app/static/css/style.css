@@ -1,6 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,700;1,700&display=swap');
 
-/* ------ 1. CSS VARIABLES (Light/Dark theme)---------- */
+/* ------ 1. CSS VARIABLES ---------- */
 :root {
 
     --bg-main: #eef1f4;
@@ -22,21 +22,6 @@
     --glass: rgba(30, 41, 59, 0.7);
     --accent-dark: #0284c7;
     --error: #ef4444;
-}
-
-[data-theme="dark"] {
-    --bg-main: #020d10;
-    --bg-secondary: #041120;
-    --text-primary: #faf5f5;
-    --text-secondary: #ddd5d5;
-    --text-muted: + 3 . +#c7d2e1;
-    --primary: #10b981;
-    --primary-hover: #059669;
-    --navbar-bg: rgba(2, 6, 23, 0.8);
-    --card-bg: #43576c;
-    --border-color: rgba(255, 255, 255, 0.1);
-    --glass-bg: rgba(255, 255, 255, 0.063);
-    --shadow: 0 8px 32px 0 rgba(6, 33, 7, 0.644);
 }
 
 * {
