@@ -9,6 +9,21 @@
 
 ---
 
+## 🎬 Demo
+
+| Member side | Admin side |
+| :---: | :---: |
+| [![Member side demo: sign up, health quiz, dashboard and progress charts](docs/demo/nutrifit-user-demo-poster.jpg)](docs/demo/nutrifit-user-demo.mp4) | [![Admin side demo: member list, progress and assigning plans](docs/demo/nutrifit-admin-demo-poster.jpg)](docs/demo/nutrifit-admin-demo.mp4) |
+| Sign up, pick a focus, health quiz, personal dashboard (BMI, BMR, water) and progress charts · ▶ [watch (1:07)](docs/demo/nutrifit-user-demo.mp4) | Member list, a member's hydration and weight, uploading a diet plan and assigning a workout · ▶ [watch (0:35)](docs/demo/nutrifit-admin-demo.mp4) |
+
+### How it works
+
+![How NutriFit works: sign up, pick a focus, health quiz, BMI and BMR, daily logging, progress charts, admin view, assigning plans](docs/demo/nutrifit-how-it-works.jpg)
+
+> The demos were recorded with sample members and made-up data; no real user information is shown.
+
+---
+
 ## 📖 Table of Contents
 
 1. [Project Overview](#-1-project-overview)
